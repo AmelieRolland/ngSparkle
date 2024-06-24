@@ -1,0 +1,58 @@
+.hauteur-hexa{
+    height: 85vh;
+}
+
+.hexago{
+    clip-path: polygon(0 0, 100% 0, 65% 100%, 0% 170%);
+    overflow-x: hidden;
+    padding: 3px;
+
+}
+.hexago2{
+    clip-path: polygon(0 0, 94% 0, 62% 100%, 0% 170%);
+    margin-top: 0px;
+    border: #ECD9B4 solid 3px;
+}
+
+.hexago3{
+    clip-path: polygon(0 0, 93.3% 0, 61.3% 100%, 0% 170%);
+    margin-top: 0px;
+    border: #ECD9B4 solid 3px;
+}
+
+.hexago4{
+    clip-path: polygon(0 0, 91% 0, 57% 100%, 0% 180%);
+    padding-top: 10px;
+    padding-left: 5px;
+    overflow: hidden;
+}
+
+.carousel-inner{
+    height: 68vh;
+}
+
+.border-dore{
+    border-left: 2px #ECD9B4 solid
+}
+
+.full-vh{
+    height: 100vh;
+}
+.h600p{
+    height: 600px;
+}
+.w60{
+    width: 60%;
+}
+
+.h100{
+    height: 100%;
+}
+
+.vh90{
+    height: 77vh;
+}
+.vh70{
+    height: 76.2vh;
+}
+

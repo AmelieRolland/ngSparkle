@@ -1,0 +1,21 @@
+.accordion-button{
+    border: none;
+    background-color: white;
+}
+
+.accordion-button:focus{
+    border-bottom:#ECD9B4 solid 3px;
+    background-color: white;
+    box-shadow: none;
+}
+.accordion-button:not(.collapsed){
+    background-color:white;
+    color: #1C2520;
+}
+.b-none{
+    border: none;
+}
+
+.accordion{
+    border-radius:0%;
+}

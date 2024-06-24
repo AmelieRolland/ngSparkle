@@ -1,0 +1,9 @@
+.hexago{
+    clip-path: polygon(0 0, 100% 0, 65% 100%, 0% 170%);
+    overflow-x: hidden;
+    padding: 3px;
+
+}
+.h600p{
+    height: 600px;
+}

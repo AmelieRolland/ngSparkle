@@ -1,0 +1,20 @@
+.navbar-nav .nav-link.active, .navbar-nav,.nav-link:focus {
+    color: #EAFEF3;
+}
+.navbar {
+    transition: transform 0.5s ease-in-out;
+    overflow: visible;
+}
+
+.hidden-nav {
+    transform: translateY(-100%);
+}
+
+.fond-vert{
+    background-color: #394B41;
+    color: #EAFEF3;
+}
+.fond-dore{
+    background-color: #ECD9B4;
+    color: #1C2520;
+}

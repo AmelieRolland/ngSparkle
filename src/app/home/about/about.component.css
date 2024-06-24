@@ -1,0 +1,9 @@
+.fond-apropos{
+    background-image: url("../../../../public/img/fond-nature.webp");
+    color: white;
+    background-attachment : fixed;
+}
+
+button{
+    border: none;
+}

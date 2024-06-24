@@ -1,1 +1,120 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+    margin: 0;
+    padding-top: 85px;
+    background-color: #EAFEF3;
+}
+p{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+}
+
+.fond-vert{
+    background-color: #394B41;
+    color: #EAFEF3;
+}
+
+.bg-h2-vert{
+    background: linear-gradient(90deg, rgba(57,75,65,1) 60%, rgba(57,75,67,0) 60%);
+    color: white;
+}
+.bg-h2-dore{
+    background: linear-gradient(90deg, rgba(236,217,180,1) 60%, rgba(236,217,180,0) 60%);
+}
+.bg-h2-clair{
+    background: linear-gradient(90deg, rgba(234,254,243,1) 60%, rgba(234,254,243,0) 60%);
+
+}
+
+h1{
+    font-size: 3em;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Libre Caslon Display', serif;
+}
+h2{
+    font-size: 1.7em;
+    text-transform: uppercase;
+}
+.vh90{
+    height: 77vh;
+    border: pink;
+}
+.vh70{
+    height: 76.2vh;
+}
+.fond-clair{
+    background-color: #EAFEF3;
+    color: #1C2520;
+}
+.fond-dore{
+    background-color: #ECD9B4;
+    color: #1C2520;
+}
+.border-dore{
+    border-left: 2px #ECD9B4 solid
+}
+
+
+/* BOUTONS */
+
+.btn-primary {
+    background-color: #394B41;
+    transition: 0.5s all ease;
+    border: none;
+    border-radius: 0%;
+
+}
+.btn-primary:hover{
+    background-color: #1C2520;
+}
+
+.btn-vert{
+    padding: 15px 30px;
+    background-color:#394B41;
+    text-decoration: none;
+    border-radius: 0%;
+    border: #394B41 solid 1px;
+    color: #EAFEF3;
+    transition:all 0.5s ease;
+    
+}
+.btn-vert:hover{
+    background-color: #394b4100;
+    border: #394B41 solid 1px;
+    border-radius: 0%;
+    color: #1C2520;
+}
+.btn-vert-clair{
+    padding: 15px 30px;
+    background-color:#ECD9B4;
+    border: #ECD9B4 solid 1px;
+    text-decoration: none;
+    border-radius: 0%;
+    color: #1C2520;
+    transition:all 0.5s ease
+}
+.btn-vert-clair:hover{
+    background-color: #394b4100;
+    border: #ECD9B4 solid 1px;
+    border-radius: 0%;
+    color: #1C2520;
+}
+
+.btn-dore{
+    padding: 15px 30px;
+    background-color: #ECD9B4;
+    text-decoration: none;
+    border-radius: 0%;
+    color: #1C2520;
+    transition:all 0.5s ease;
+    border: #ECD9B4 solid 1px;
+
+}
+.btn-dore:hover{
+    background-color: #394b4100;
+    border: #ECD9B4 solid 1px;
+    border-radius: 0%;
+    color: #ECD9B4;
+}
