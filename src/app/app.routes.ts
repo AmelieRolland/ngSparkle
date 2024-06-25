@@ -1,8 +1,7 @@
 import { Routes } from '@angular/router';
 import { AccueilComponent } from './home/accueil/accueil.component';
-import { ProComponent } from './pro/pro.component';
+import { ProComponent } from './professionnal/pro-main/pro.component';
 import { ArticlesComponent } from './articles/articles.component';
-import { Component } from '@angular/core';
 import { Error404Component } from './error404/error404.component';
 
 export const routes: Routes = [

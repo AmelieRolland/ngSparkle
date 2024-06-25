@@ -113,6 +113,7 @@ h2{
 
 }
 .btn-dore:hover{
+    padding: 15px 30px;
     background-color: #394b4100;
     border: #ECD9B4 solid 1px;
     border-radius: 0%;
