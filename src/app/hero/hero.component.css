@@ -58,10 +58,14 @@
 
 
 
+
 @media screen and (max-width: 757px) {
     .hexago2, .hexago3, .hexago4{
         clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
         width: 100vw;
+        height: 60vh;
+        padding: 0px;
+
 
     }
 
@@ -87,6 +91,16 @@
     .bloc-droit{
         padding-left: 15px;
         padding-right: 15px;
+    }
+
+    .vh70{
+        height: 59.2vh;
+    }
+    .vh90{
+        height: 59vh;
+    }
+    .hauteur-hexa{
+        height: 63vh;
     }
     
 
