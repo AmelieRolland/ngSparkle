@@ -84,17 +84,9 @@
         clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
         width: 100vw;
     }
-    .bg-h2-clair{
-        background: linear-gradient(90deg, rgba(234,254,243,1) 60%, rgba(234,254,243,0) 60%);
-    }
-
-    .bg-h2-vert{
-        background: linear-gradient(90deg, rgba(57,75,65,1) 100%, rgba(57,75,67,0) 0%);
-    }
-
-    .bg-h2-dore{
-        background: linear-gradient(90deg, rgba(236,217,180,1) 100%, rgba(236,217,180,0) 0%);
-
-    }
+    .bloc-droit{
+        padding-left: 15px;
+        padding-right: 15px;
+    
 
 }
