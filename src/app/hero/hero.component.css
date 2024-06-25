@@ -55,3 +55,46 @@
 .vh70{
     height: 76.2vh;
 }
+
+
+
+@media screen and (max-width: 757px) {
+    .hexago2, .hexago3, .hexago4{
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        width: 100vw;
+
+    }
+
+    .bloc-gauche{
+        width: 100%;
+    }
+    .container, .container-fluid {
+        width: 100%;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .carousel{
+        width: auto;
+    }
+
+    .full-vh{
+        height: 70vh;
+    }
+    .hexago{
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        width: 100vw;
+    }
+    .bg-h2-clair{
+        background: linear-gradient(90deg, rgba(234,254,243,1) 60%, rgba(234,254,243,0) 60%);
+    }
+
+    .bg-h2-vert{
+        background: linear-gradient(90deg, rgba(57,75,65,1) 100%, rgba(57,75,67,0) 0%);
+    }
+
+    .bg-h2-dore{
+        background: linear-gradient(90deg, rgba(236,217,180,1) 100%, rgba(236,217,180,0) 0%);
+
+    }
+
+}
