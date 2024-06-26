@@ -10,7 +10,7 @@ export const routes: Routes = [
     { path: '', component : AccueilComponent},
     { path: 'pro', component : ProComponent},
     { path: 'articles', component : ArticlesComponent},
-    { path: 'inscription', component : InscriptionComponent},
+    { path: 'connexion/inscription', component : InscriptionComponent},
     { path: 'connexion', component : ConnexionComponent},
     { path: '**', component : Error404Component}
 
