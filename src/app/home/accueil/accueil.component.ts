@@ -5,6 +5,7 @@ import { ContactComponent } from '../contact/contact.component';
 import { PrestationsComponent } from '../prestations/prestations.component';
 import { FaqComponent } from '../faq/faq.component';
 import { TestimonialsComponent } from '../testimonials/testimonials.component';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-accueil',
@@ -15,5 +16,9 @@ import { TestimonialsComponent } from '../testimonials/testimonials.component';
 })
 export class AccueilComponent {
 
-  
+  constructor(private titleService: Title) { }
+
+  ngOnInit(): void {
+    this.titleService.setTitle('Sparkle - bienvenue');
+  }
 }
