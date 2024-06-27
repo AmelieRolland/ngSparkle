@@ -12,6 +12,8 @@ Front-end :
 - **Figma**
 - **Angular**
 - **Bootstrap**
+- **TypeScript**
+- **JavaScript**
 
 Back-end :
 - **Symfony**
