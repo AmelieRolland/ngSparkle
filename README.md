@@ -8,10 +8,15 @@ I made the design of this website from scratch on Figma.
 
 ## Technologies Used
 
+Front-end :
 - **Figma**
 - **Angular**
 - **Bootstrap**
-- **TypeScript**
+
+Back-end :
+- **Symfony**
+- **MySQL**
+- **PHP**
 
 ## Home page
  - About us

@@ -39,15 +39,16 @@
 
                         </div>
                     </div>
-                    <div>
-                        <button class="btnDecrement btn-outline-secondary" (click)="decrement()">-</button>
-                        <input class="inputQt" type="number" value="0" min="0" [(ngModel)]="count" readonly>
-                        <button class="btnIncrement btn-outline-secondary" (click)="increment()" >+</button>
+                    <div class="row d-flex flex-row col-1">
+                            <button class="btnDecrement btn-secondary" (click)="decrement()">-</button>
+                            <input value="0" min="0" [(ngModel)]="count" readonly>
+                            <button class="btnIncrement btn-secondary" (click)="increment()">+</button>
+
                     </div>
 
-                    <div>
-                        <p> <strong>Prix TTC : € </strong></p>
-                    </div>
+                </div>
+                <div class="text-end">
+                    <p> <strong>Prix TTC : € </strong></p>
                 </div>
 
 

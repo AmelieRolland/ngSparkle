@@ -29,10 +29,10 @@
                         Découvrez nos services sur mesure pour les professionnels.</p>
                     <div class="d-flex flex-row w-100">
                         <div>
-                            <a href="#services" class="btn-vert" title="découvrez nos services"> Je découvre </a>
+                            <a [routerLink]="['/pro/services']" fragment="services" class="btn-vert" title="découvrez nos services"> Je découvre </a>
                         </div>
                         <div class="ps-5">
-                            <a href="#devis" class="btn-vert-clair" title="demander un devis"> Je demande un devis </a>
+                            <a [routerLink]="['/pro/devis']" fragment="devis" class="btn-vert-clair" title="demander un devis"> Je demande un devis </a>
                         </div>
                     </div>
                 </div>
