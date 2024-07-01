@@ -7,6 +7,9 @@ import { InscriptionComponent } from './User/inscription/inscription.component';
 import { ConnexionComponent } from './User/connexion/connexion.component';
 import { ServicesComponent } from './professionnal/services/services.component';
 import { DevisComponent } from './professionnal/devis/devis.component';
+import { AuthGuard } from './shared/services/auth/auth.guard';
+import { AdminComponent } from './admin/admin/admin.component';
+import { LoginComponent } from './shared/services/auth/auth/components/login/login.component';
 
 export const routes: Routes = [
     { path: '', component : AccueilComponent},
@@ -15,7 +18,8 @@ export const routes: Routes = [
     { path: 'pro/devis', component : DevisComponent},
     { path: 'articles', component : ArticlesComponent},
     { path: 'connexion/inscription', component : InscriptionComponent},
-    { path: 'connexion', component : ConnexionComponent},
+    { path: 'login', component : LoginComponent},
+    { path: 'admin',component: AdminComponent,canActivate: [AuthGuard]},
     { path: '**', component : Error404Component}
 
 ];
