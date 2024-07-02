@@ -1,20 +1,22 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../../auth.service';
-import { Router } from '@angular/router';
-import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../auth.service';
+import { NgIf } from '@angular/common';
+
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [NgIf, FormsModule],
+  imports: [FormsModule, NgIf],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  email!: string;
-  password!: string;
-  errorMessage!: string;
+  email: string = '';
+  password: string = '';
+  errorMessage: string | null = null;
+
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -22,11 +24,8 @@ export class LoginComponent {
     if (this.authService.login(this.email, this.password)) {
       this.router.navigate(['/admin']);
     } else {
-      this.errorMessage = 'Email ou mot de passe incorrect';
+      this.errorMessage = 'Mot de passe ou email incorrect';
     }
-    console.log(this.authService.login(this.email, this.password));
-
   }
-
-
 }
+

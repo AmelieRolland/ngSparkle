@@ -1,0 +1,42 @@
+<section>
+    <div class="container fond-clair">
+        <h1 class="text-center py-5">Récapitulatif de votre panier</h1>
+        <div class="row">
+
+            <div class="col-lg-8 p-0">
+                <div class="d-flex justify-content-between align-items-center border p-3">
+                    <div>
+                        <h4>-article- en -matière-</h4>
+                        <p>Matière : </p>
+                        <p>Service : </p>
+                    </div>
+                    <div>
+                            <p class="mb-0 me-2">Quantité :</p>
+                            <div class="input-group quantity-selector">
+                              <div class="input-group-prepend">
+                                <button class="btn btn-outline-secondary" type="button" (click)="decrement()">-</button>
+                              </div>
+                              <input type="text" class="form-control text-center" value="1" [(ngModel)]="quantity" readonly>
+                              <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" (click)="increment()">+</button>
+                              </div>
+                            </div>
+                          <p class="mt-3">Prix : {{ price }} €</p>
+                    </div>
+                </div>
+                <div class="border p-3">
+                    <h4>Nom de l'article</h4>
+                    <p>Matière : </p>
+                    <p>Service : </p>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="border">
+                    <h3>Total :</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

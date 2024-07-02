@@ -10,12 +10,14 @@ import { DevisComponent } from './professionnal/devis/devis.component';
 import { AuthGuard } from './shared/services/auth/auth.guard';
 import { AdminComponent } from './admin/admin/admin.component';
 import { LoginComponent } from './shared/services/auth/auth/components/login/login.component';
+import { CartComponent } from './cart/cart.component';
 
 export const routes: Routes = [
     { path: '', component : AccueilComponent},
     { path: 'pro', component : ProComponent},
     { path: 'pro/services', component : ServicesComponent},
     { path: 'pro/devis', component : DevisComponent},
+    { path: 'panier', component : CartComponent},
     { path: 'articles', component : ArticlesComponent},
     { path: 'connexion/inscription', component : InscriptionComponent},
     { path: 'login', component : LoginComponent},
