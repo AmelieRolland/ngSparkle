@@ -1,26 +1,23 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, signal, computed } from '@angular/core';
 
 @Component({
   selector: 'app-cart',
-  standalone: true,
-  imports: [FormsModule],
   templateUrl: './cart.component.html',
-  styleUrl: './cart.component.css'
+  styleUrls: ['./cart.component.css'],
+  standalone: true,
 })
 export class CartComponent {
-  quantity: number = 1;
-  price: number = 10;
-  total!: number;
+  quantity = signal(1);
+  price = signal(16.5);
+  total = computed(() => this.quantity() * this.price());
 
   increment() {
-    this.quantity++;
+    this.quantity.set(this.quantity() + 1);
   }
 
   decrement() {
-    if (this.quantity > 1) {
-      this.quantity--;
-    }
+    this.quantity.set(this.quantity() > 1 ? this.quantity() - 1 : 1);
   }
-
 }
+
+
