@@ -7,7 +7,7 @@ import { InscriptionComponent } from './User/inscription/inscription.component';
 import { ConnexionComponent } from './User/connexion/connexion.component';
 import { ServicesComponent } from './professionnal/services/services.component';
 import { DevisComponent } from './professionnal/devis/devis.component';
-import { AuthGuard } from './shared/services/auth/auth.guard';
+// import { AuthGuard } from './shared/services/auth/auth.guard;
 import { AdminComponent } from './admin/admin/admin.component';
 import { LoginComponent } from './shared/services/auth/auth/components/login/login.component';
 import { CartComponent } from './cart/cart.component';
@@ -19,9 +19,9 @@ export const routes: Routes = [
     { path: 'pro/devis', component : DevisComponent},
     { path: 'panier', component : CartComponent},
     { path: 'articles', component : ArticlesComponent},
-    { path: 'connexion/inscription', component : InscriptionComponent},
+    { path: 'login/inscription', component : InscriptionComponent},
     { path: 'login', component : LoginComponent},
-    { path: 'admin',component: AdminComponent,canActivate: [AuthGuard]},
+    { path: 'admin',component: AdminComponent},
     { path: '**', component : Error404Component}
 
 ];

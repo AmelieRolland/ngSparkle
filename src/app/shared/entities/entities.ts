@@ -59,3 +59,9 @@ export interface User{
     address: string;
     gender: Gender;
 }
+
+export interface CartItem {
+    quantity: number;
+    price: number;
+    subTotal: number;
+  }

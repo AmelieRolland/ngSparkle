@@ -1,29 +1,35 @@
 <section class="container-fluid fond-vert">
-    <div class="container pb300">
-        <div class="col-lg-9 mx-auto row fond-clair border p-5 pt-lg-5">
-          <div class="col-lg-5">
-            <h1 class="pt-0">Connexion</h1>
-          </div>
-          <div class="col-lg-6">
-            <form (submit)="login()">
-              <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Votre email</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" [(ngModel)]="email" name="email" aria-describedby="emailHelp" required>
-              </div>
-              <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" [(ngModel)]="password" name="password" required>
-              </div>
-              <button type="submit" class="btn btn-primary">Connexion</button>
-            </form>
-            <div *ngIf="errorMessage" class="text-danger mt-3">
-              {{ errorMessage }}
+  <div class="container pb300">
+    <div class="col-lg-9 mx-auto row fond-clair border p-5 pt-lg-5">
+      <div class="col-lg-5">
+        <h1 class="pt-0">Connexion</h1>
+      </div>
+      <div class="col-lg-6">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div formGroupName="credentials">
+
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Votre email</label>
+              <input type="email" class="form-control" id="email" formControlName="username" name="email"
+                aria-describedby="emailHelp" required>
             </div>
-            <div class="fs-6 fw-light pt-5">
-              <p class="fs-6 fw-lighter mb-0">Vous n'êtes pas encore inscrit?</p>
-              <a class="fs-6 pt-1" routerLink="inscription">Je créé mon compte</a>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
+              <input type="password" class="form-control" id="password" formControlName="password"
+                name="password" required>
             </div>
           </div>
+          <button type="submit" [disabled]="loginForm.invalid" class="btn btn-primary">Connexion</button>
+
+        </form>
+        <!-- <div *ngIf="errorMessage" class="text-danger mt-3">
+          {{ errorMessage }}
+        </div> -->
+        <div class="fs-6 fw-light pt-5">
+          <p class="fs-6 fw-lighter mb-0">Vous n'êtes pas encore inscrit?</p>
+          <a class="fs-6 pt-1" routerLink="inscription">Je créé mon compte</a>
         </div>
       </div>
+    </div>
+  </div>
 </section>
