@@ -4,13 +4,12 @@ import { ProComponent } from './professionnal/pro-main/pro.component';
 import { ArticlesComponent } from './articles/articles.component';
 import { Error404Component } from './error404/error404.component';
 import { InscriptionComponent } from './User/inscription/inscription.component';
-import { ConnexionComponent } from './User/connexion/connexion.component';
 import { ServicesComponent } from './professionnal/services/services.component';
 import { DevisComponent } from './professionnal/devis/devis.component';
-// import { AuthGuard } from './shared/services/auth/auth.guard;
 import { AdminComponent } from './admin/admin/admin.component';
 import { LoginComponent } from './shared/services/auth/auth/components/login/login.component';
 import { CartComponent } from './cart/cart.component';
+import { authGuard } from './shared/services/auth/auth.guard';
 
 export const routes: Routes = [
     { path: '', component : AccueilComponent},
@@ -21,7 +20,7 @@ export const routes: Routes = [
     { path: 'articles', component : ArticlesComponent},
     { path: 'login/inscription', component : InscriptionComponent},
     { path: 'login', component : LoginComponent},
-    { path: 'admin',component: AdminComponent},
+    { path: 'admin',component: AdminComponent, canActivate: [authGuard]},
     { path: '**', component : Error404Component}
 
 ];
