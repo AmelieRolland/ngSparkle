@@ -7,6 +7,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { JwtInterceptor, jwtInterceptorProvider } from './jwt.interceptor';
 import { ApiService } from './shared/services/api.service';
 import { AuthService } from './shared/services/auth/auth.service';
+import { authInterceptor } from './interceptor/auth.interceptor';
 
 
 export const appConfig: ApplicationConfig = {
@@ -14,7 +15,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }), 
     provideRouter(routes), 
     provideClientHydration(),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([authInterceptor])),
     jwtInterceptorProvider,
     ApiService,
     AuthService,

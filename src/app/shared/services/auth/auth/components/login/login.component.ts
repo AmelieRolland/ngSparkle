@@ -5,12 +5,12 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { AuthService } from '../../../auth.service';
 import { IToken } from '../../../../../entities/auth';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
  selector: 'app-login',
  standalone: true,
- imports: [ReactiveFormsModule, CommonModule],
+ imports: [ReactiveFormsModule, CommonModule, RouterLink],
  templateUrl: './login.component.html',
  styleUrl: './login.component.css'
 })
