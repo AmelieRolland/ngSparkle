@@ -58,6 +58,7 @@ export interface IUser{
     phone: string;
     direction: string;
     gender: Gender;
+    registration_date: Date;
 }
 
 export interface CartItem {

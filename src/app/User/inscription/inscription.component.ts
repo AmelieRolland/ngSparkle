@@ -31,6 +31,7 @@ export class InscriptionComponent {
     password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(20)]),
     confirmPassword: new FormControl('', Validators.required),
     direction: new FormControl,
+    registration_date: new FormControl
 
 
     
@@ -51,7 +52,9 @@ export class InscriptionComponent {
         return;
       }
     }
+    
     if (this.loginForm.valid) {
+      this.loginForm.patchValue({ registration_date: new Date() });
       this.service.register(this.loginForm.value).subscribe({
         next: (response) => {
           console.log('Inscription réussie', response);
