@@ -49,14 +49,14 @@ export interface Order{
     deliveryDate: Date;
 }
 
-export interface User{
+export interface IUser{
     id: number;
     name: string;
     surname: string;
     email: string;
     password: string;
     phone: string;
-    address: string;
+    direction: string;
     gender: Gender;
 }
 

@@ -6,7 +6,7 @@ import { Error404Component } from './error404/error404.component';
 import { InscriptionComponent } from './User/inscription/inscription.component';
 import { ServicesComponent } from './professionnal/services/services.component';
 import { DevisComponent } from './professionnal/devis/devis.component';
-import { AdminComponent } from './admin/admin/admin.component';
+import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './shared/services/auth/auth/components/login/login.component';
 import { CartComponent } from './cart/cart.component';
 import { authGuard } from './shared/services/auth/auth.guard';

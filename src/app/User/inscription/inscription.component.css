@@ -1,2 +1,5 @@
-
+.focus-ring{
+    --bs-focus-ring-color: #7da08d;
+    border: none;
+}
 

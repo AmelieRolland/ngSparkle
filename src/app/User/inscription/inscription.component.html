@@ -11,47 +11,55 @@
 
             <div class="col-lg-6">
 
-                <form>
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                     <div class="mb-3">
                         <label for="validationCustom04" class="form-label">Civilité</label>
-                        <select class="form-select" id="validationCustom04" required>
+                        <select class="form-select focus-ring" id="validationCustom04" formControlName="gender" required>
                             <option value="">Choisir...</option>
-                            <option value="Mme">Madame</option>
-                            <option value="M.">Monsieur</option>
-                            <option value="Autre">Autre</option>
+                            <option *ngFor="let gender of genders" value="/api/genders/{{ gender.id }}">{{ gender.genderName }}</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="validationCustom01" class="form-label">Prénom</label>
-                        <input type="text" class="form-control" id="validationCustom01" required>
+                        <input formControlName="name" type="text" class="form-control focus-ring" id="name" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="validationCustom02" class="form-label">Nom</label>
-                        <input type="text" class="form-control" id="validationCustom02" required>
+                        <input formControlName="surname" type="text" class="form-control focus-ring" id="surname"
+                            required>
                     </div>
 
 
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Votre email :</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input formControlName="email" type="email" class="form-control focus-ring" id="email"
+                            aria-describedby="emailHelp">
+                        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+                            Email invalide
+                        </div>
                     </div>
 
                     <div class="col-md-6">
                         <label for="validationCustom03" class="form-label">Adresse</label>
-                        <input type="text" class="form-control" id="validationCustom03" required>
+                        <input formControlName="direction" type="text" class="form-control focus-ring" id="direction"
+                            required>
                     </div>
                     <div class="mb-3">
                         <label for="inputPassword6" class="col-form-label">Mot de passe :</label>
-                        <input type="password" id="inputPassword6" class="form-control"
+                        <input formControlName="password" type="password" id="password" class="form-control focus-ring"
                             aria-describedby="passwordHelpInline">
+                        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+                            Mot de passe requis
+                        </div>
                         <span id="passwordHelpInline" class="form-text">
                             Must be 8-20 characters long.
                         </span>
+
                     </div>
                     <div class="mb-3">
                         <label for="inputPassword6" class="col-form-label">Répétez votre mot de passe :</label>
-                        <input type="password" id="inputPassword6" class="form-control"
+                        <input formControlName="confirmPassword" type="password" id="password" class="form-control focus-ring"
                             aria-describedby="passwordHelpInline">
                     </div>
 
