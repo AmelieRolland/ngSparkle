@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { isPlatformBrowser } from '@angular/common';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { environment } from '../../../../environments/environment';
 
 export interface IToken {
   token: string;
@@ -12,7 +13,7 @@ export interface IToken {
   providedIn: 'root'
 })
 export class AuthService {
-  private url = 'http://localhost:8000/api';
+  private url = environment.apiUrl;
 
   constructor(private http: HttpClient, private router: Router, @Inject(PLATFORM_ID) private platformId: Object) {}
 
