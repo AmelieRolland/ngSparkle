@@ -15,7 +15,7 @@ import { NgIf } from '@angular/common';
 export class ArticleModalComponent implements AfterViewInit, OnInit {
 
   articles: Article[] = [];
-  articleSelected: Article | null = null; // Initialiser avec null
+  articleSelected: Article | null = null; 
   count: number = 0;
 
   constructor(private route: ActivatedRoute, private articleService: ArticlesService) { }
