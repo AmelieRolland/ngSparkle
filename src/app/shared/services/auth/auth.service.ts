@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { isPlatformBrowser } from '@angular/common';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -13,7 +14,7 @@ export interface IToken {
 export class AuthService {
   private url = 'http://localhost:8000/api';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, @Inject(PLATFORM_ID) private platformId: Object) {}
 
   login(credentials: { username: string; password: string }): Observable<IToken> {
     return this.http.post<IToken>(`${this.url}/login_check`, credentials);

@@ -56,6 +56,7 @@ export interface IUser{
     email: string;
     password: string;
     phone: string;
+    birthday: Date;
     direction: string;
     gender: Gender;
     registration_date: Date;
