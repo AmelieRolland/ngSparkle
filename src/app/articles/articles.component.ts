@@ -1,12 +1,12 @@
 import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ArticlesService } from '../shared/services/articles.service';
-import { Article, Category, Fabric, Service } from '../shared/entities/entities';
+import { Article, Category, Fabric, Service, Item } from '../shared/entities/entities';
 import { NgFor, NgIf } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { CategoriesService } from '../shared/services/categories.service';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { FabricService } from '../shared/services/fabric.service';
 import { ServicesService } from '../shared/services/services.service';
 
@@ -18,27 +18,31 @@ import { ServicesService } from '../shared/services/services.service';
   styleUrls: ['./articles.component.css']
 })
 export class ArticlesComponent implements OnInit, OnDestroy {
-
   articles: Article[] = [];
   categories: Category[] = [];
   fabrics: Fabric[] = [];
   services: Service[] = [];
   dataArticles!: Subscription;
   dataCategories!: Subscription;
-  articleSelected: Article | null = null;
   dataFabrics!: Subscription;
   dataServices!: Subscription;
+  articleSelected: Article | null = null;
+  fabricSelected: Fabric | null = null;
+  selectedServices: Service[] = [];
   count: number = 0;
+  panier: Item[] = [];
 
   @ViewChild('inputQt', { static: true }) inputQt!: ElementRef;
   @Output() close = new EventEmitter<void>();
 
-  constructor(private titleService: Title, 
-    private articlesService: ArticlesService, 
+  constructor(
+    private titleService: Title,
+    private articlesService: ArticlesService,
     private categoriesService: CategoriesService,
     private fabricService: FabricService,
-    private servicesService: ServicesService
-  ) { }
+    private servicesService: ServicesService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.titleService.setTitle('Mes articles');
@@ -46,12 +50,12 @@ export class ArticlesComponent implements OnInit, OnDestroy {
     this.fetchCategories();
     this.fetchFabrics();
     this.fetchServices();
+    this.loadCartFromSession();
   }
 
   fetchArticles(): void {
     this.dataArticles = this.articlesService.getAll().subscribe((data) => {
       this.articles = data;
-      console.log(data);
     });
   }
 
@@ -93,18 +97,60 @@ export class ArticlesComponent implements OnInit, OnDestroy {
   }
 
   updateInputValue() {
-    this.inputQt.nativeElement.value = this.count;
+    this.inputQt.nativeElement.value = this.count.toString();
   }
 
-  openModal(article: any): void {
+  openModal(article: Article): void {
     this.articleSelected = article;
+    this.fabricSelected = null;
+    this.selectedServices = [];
   }
 
   closeModal(): void {
     this.articleSelected = null;
+    this.fabricSelected = null;
+    this.selectedServices = [];
+    this.count = 0;
+  }
+
+  toggleService(service: Service): void {
+    const index = this.selectedServices.findIndex(s => s.id === service.id);
+    if (index === -1) {
+      this.selectedServices.push(service); 
+    } else {
+      this.selectedServices.splice(index, 1);
+    }
   }
 
   addToCart(): void {
-    console.log('Adding to cart:', this.articleSelected);
+    if (this.articleSelected && this.fabricSelected && this.selectedServices.length > 0 && this.count > 0) {
+      this.selectedServices.forEach(service => {
+        const item: Item = {
+          id: this.panier.length + 1,
+          article: this.articleSelected!,
+          fabric: this.fabricSelected!,
+          service: service, 
+          quantity: this.count
+        };
+        this.panier.push(item);
+        console.log('Item ajouté au panier:', item);
+      });
+  
+      this.saveCartToSession();
+      this.closeModal();
+      this.router.navigate(['/panier']); 
+      console.error('Veuillez sélectionner un article, une matière, un ou plusieurs services, et spécifier une quantité.');
+    }
+  }
+
+  private saveCartToSession(): void {
+    sessionStorage.setItem('panier', JSON.stringify(this.panier));
+  }
+
+  private loadCartFromSession(): void {
+    const savedCart = sessionStorage.getItem('panier');
+    if (savedCart) {
+      this.panier = JSON.parse(savedCart);
+    }
   }
 }

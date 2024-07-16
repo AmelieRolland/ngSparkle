@@ -4,4 +4,6 @@
 
 .modal{
     --bs-modal-width: 900px;
+    --bs-modal-height: 600px;
+    
 }

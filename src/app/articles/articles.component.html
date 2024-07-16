@@ -40,37 +40,38 @@
                 <div class="col-lg-6 d-flex flex-column justify-content-evenly">
                     <div>
                         <p><strong>Je sélectionne la matière :</strong></p>
-                        <select class="form-select" aria-label="Default select example">
-                            <option *ngFor="let fabric of fabrics" [value]="fabric.id">{{ fabric.fabricName }}</option>
+                        <select class="form-select" [(ngModel)]="fabricSelected" aria-label="Default select example">
+                            <option *ngFor="let fabric of fabrics" [ngValue]="fabric">{{ fabric.fabricName }}</option>
                         </select>
                     </div>
                     <div>
                         <p><strong>Je choisis le ou les services :</strong></p>
                         <div class="d-flex flex-row">
-
-                            <div *ngFor="let service of services" class="me-2 mb-2 ">
+                            <div *ngFor="let service of services" class="me-2 mb-2">
                                 <input type="checkbox" class="btn-check" [id]="'btncheck' + service.id"
-                                    autocomplete="off">
+                                    [(ngModel)]="selectedServices[service.id]" autocomplete="off">
                                 <label class="btn btn-outline-primary" [for]="'btncheck' + service.id">{{
                                     service.serviceName }}</label>
                             </div>
                         </div>
+                    </div>
+                    <div>
+                        <p><strong>Je sélectionne la quantité :</strong></p>
                         <div class="row d-flex">
                             <button class="btnDecrement btn-secondary" (click)="decrement()">-</button>
-                            <input value="0" min="0" [(ngModel)]="count" readonly>
+                            <input #inputQt type="number" min="0" [(ngModel)]="count" readonly>
                             <button class="btnIncrement btn-secondary" (click)="increment()">+</button>
                         </div>
                     </div>
-
                 </div>
-
             </div>
             <div class="text-end">
                 <p><strong>Prix TTC : € </strong></p>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="addToCart()">Ajouter au panier</button>
+            </div>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-primary" (click)="addToCart()">Ajouter au panier</button>
-        </div>
+
     </div>
 </div>

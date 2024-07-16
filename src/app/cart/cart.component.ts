@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CartItem } from '../shared/entities/entities';
-import { CommonModule, NgFor } from '@angular/common';
-
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -11,41 +11,36 @@ import { CommonModule, NgFor } from '@angular/common';
   standalone: true,
 })
 export class CartComponent {
-  cart: CartItem[] = [
-    {
-      quantity: 1,
-      price: 16.5,
-      subTotal: 16.5, 
+  cart: CartItem[] = [];
+  total = 0;
+
+  constructor(private router: Router) {
+    const navigation = this.router.getCurrentNavigation();
+    if (navigation && navigation.extras.state && navigation.extras.state['panier']) {
+      this.cart = navigation.extras.state['panier'].map((item: any) => ({
+        quantity: item.quantity,
+        price: item.service.price,
+        subTotal: item.quantity * item.service.price,
+        articleName: item.article.articleName,
+        fabricName: item.fabric.fabricName,
+        serviceName: item.service.serviceName,
+      }));
     }
-  ];
-
-  total = 0; 
-
-  constructor() {
-    this.calculateTotal(); 
-  }
-
-  addItem(pricePerUnit: number) {
-    const newItem: CartItem = {
-      quantity: 1,
-      price: pricePerUnit,
-      subTotal: pricePerUnit, 
-    };
-
-    this.cart.push(newItem);
-    this.calculateTotal(); // Recalculer le total après ajout
+    this.calculateTotal();
   }
 
   increment(item: CartItem) {
     item.quantity++;
     this.updateSubTotal(item);
-    this.calculateTotal(); // Recalculer le total après modification
+    this.calculateTotal();
   }
 
   decrement(item: CartItem) {
-    item.quantity = item.quantity > 1 ? item.quantity - 1 : 1;
-    this.updateSubTotal(item);
-    this.calculateTotal(); // Recalculer le total après modification
+    if (item.quantity > 1) {
+      item.quantity--;
+      this.updateSubTotal(item);
+      this.calculateTotal();
+    }
   }
 
   updateSubTotal(item: CartItem) {
@@ -55,13 +50,16 @@ export class CartComponent {
   calculateTotal() {
     this.total = this.cart.reduce((sum, item) => sum + item.subTotal, 0);
   }
+
+  removeItem(item: CartItem) {
+    const index = this.cart.indexOf(item);
+    if (index > -1) {
+        this.cart.splice(index, 1);
+        this.calculateTotal(); 
+    }
 }
 
 
 
-
-
-
-
-
-
+  
+}

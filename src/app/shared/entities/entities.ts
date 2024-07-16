@@ -33,6 +33,7 @@ export interface Item{
     article: Article;
     fabric: Fabric;
     service: Service;
+    quantity: number;
 }
 
 export interface Status{
@@ -67,3 +68,13 @@ export interface CartItem {
     price: number;
     subTotal: number;
   }
+
+  export interface CartItem {
+    quantity: number;
+    price: number;
+    subTotal: number;
+    articleName: string;
+    fabricName: string;
+    serviceName: string;
+  }
+  
