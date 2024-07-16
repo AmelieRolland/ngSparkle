@@ -6,8 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "serve:ssr:ngSparkle": "node dist/ng-sparkle/server/server.mjs"
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
@@ -20,7 +19,6 @@
     "@angular/platform-browser-dynamic": "^18.0.0",
     "@angular/platform-server": "^18.0.0",
     "@angular/router": "^18.0.0",
-    "@angular/ssr": "^18.0.4",
     "@auth0/angular-jwt": "^5.2.0",
     "bootstrap": "^5.3.3",
     "express": "^4.18.2",
