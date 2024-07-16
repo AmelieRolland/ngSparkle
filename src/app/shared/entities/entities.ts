@@ -9,6 +9,7 @@ export interface Article {
 export interface Category {
     id: number;
     categoryName: string;
+    articles: number[]
 }
 
 export interface Fabric {

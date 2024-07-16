@@ -2,12 +2,12 @@
   <div class="container fond-clair">
     <h1 class="text-center py-5">Récapitulatif de votre panier</h1>
     <div class="row">
-      <div *ngFor="let item of cart" class="col-lg-8 p-0">
+      <div *ngFor="let item of cart; let i = index" class="col-lg-8 p-0">
         <div class="d-flex justify-content-between align-items-center border p-3">
           <div>
             <h4>{{ item.articleName }} en {{ item.fabricName }}</h4>
             <p>Service : {{ item.serviceName }}</p>
-            <a class="me-4" href="javascript:void(0)" (click)="removeItem(item)">supprimer</a>
+            <a class="me-4" href="#" (click)="removeItem(i)">supprimer</a>
           </div>
           <div>
             <p class="mb-0 me-2">Quantité :</p>
@@ -24,7 +24,7 @@
           </div>
         </div>
       </div>
-  
+
       <div class="col-lg-4">
         <div class="border">
           <h3>Total : {{ total }} €</h3>

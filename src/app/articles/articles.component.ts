@@ -31,6 +31,7 @@ export class ArticlesComponent implements OnInit, OnDestroy {
   selectedServices: Service[] = [];
   count: number = 0;
   panier: Item[] = [];
+  selectedCategory: Category | null = null;
 
   @ViewChild('inputQt', { static: true }) inputQt!: ElementRef;
   @Output() close = new EventEmitter<void>();
@@ -129,28 +130,31 @@ export class ArticlesComponent implements OnInit, OnDestroy {
           id: this.panier.length + 1,
           article: this.articleSelected!,
           fabric: this.fabricSelected!,
-          service: service, 
+          service: service,
           quantity: this.count
         };
         this.panier.push(item);
         console.log('Item ajouté au panier:', item);
       });
-  
+
       this.saveCartToSession();
       this.closeModal();
       this.router.navigate(['/panier']); 
+    } else {
       console.error('Veuillez sélectionner un article, une matière, un ou plusieurs services, et spécifier une quantité.');
     }
   }
 
   private saveCartToSession(): void {
     sessionStorage.setItem('panier', JSON.stringify(this.panier));
+    console.log('Panier sauvegardé dans la session:', this.panier);
   }
 
   private loadCartFromSession(): void {
     const savedCart = sessionStorage.getItem('panier');
     if (savedCart) {
       this.panier = JSON.parse(savedCart);
+      console.log('Panier chargé de la session:', this.panier);
     }
   }
 }
