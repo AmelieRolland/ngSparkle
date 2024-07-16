@@ -1,3 +1,7 @@
 .nav-link {
     color: #1C2520;
 }
+
+.modal{
+    --bs-modal-width: 900px;
+}

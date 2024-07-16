@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root'
 })
 export class GenderService {
-  private apiUrl = environment.apiUrl +'/genders';
+  private apiUrl = ` ${environment.apiUrl}/genders`;
 
   constructor(private http: HttpClient) { }
 

@@ -11,26 +11,25 @@ import { CommonModule, NgFor } from '@angular/common';
   standalone: true,
 })
 export class CartComponent {
-  // Exemple avec un seul article pour commencer
   cart: CartItem[] = [
     {
       quantity: 1,
       price: 16.5,
-      subTotal: 16.5, // Calculé dynamiquement dans le template
+      subTotal: 16.5, 
     }
   ];
 
-  total = 0; // Initialisez le total ici
+  total = 0; 
 
   constructor() {
-    this.calculateTotal(); // Calculer le total initial
+    this.calculateTotal(); 
   }
 
   addItem(pricePerUnit: number) {
     const newItem: CartItem = {
       quantity: 1,
       price: pricePerUnit,
-      subTotal: pricePerUnit, // Vous pouvez initialiser le sous-total si nécessaire
+      subTotal: pricePerUnit, 
     };
 
     this.cart.push(newItem);
