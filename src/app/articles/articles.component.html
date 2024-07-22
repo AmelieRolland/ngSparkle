@@ -1,27 +1,29 @@
 <ul class="nav justify-content-center bg-white py-3">
     <li *ngFor="let category of categories" class="nav-item px-3">
-        <a class="nav-link" aria-current="page" href="#">{{category.categoryName}}</a>
+      <span class="nav-link" role="button" (click)="selectCategory(category.id)">
+        {{category.categoryName}}
+      </span>
     </li>
-</ul>
-
-<section>
+  </ul>
+  
+  <section>
     <div class="container fond-clair">
-        <div class="row d-flex flex-wrap justify-content-between">
-            <div *ngFor="let article of articles" class="card col-lg-4 col-md-5 col-sm-6 col-xs-12 mb-5"
-                style="width: 18rem;">
-                <img class="img-fluid pt-3" width="400" height="400" [src]="'/img/articles/' + article.imgUrl"
-                    alt="{{article.articleName}}">
-                <div class="card-body">
-                    <h5 class="card-title pb-3">{{ article.articleName }}</h5>
-                    <button type="button" class="mt-3 px-4 py-2 bg-blue-500 text-white rounded"
-                        (click)="openModal(article)">
-                        Je sélectionne
-                    </button>
-                </div>
-            </div>
+      <div class="row d-flex flex-wrap justify-content-between">
+        <div *ngFor="let article of articles | categoryFilter: selectedCategory" class="card col-lg-4 col-md-5 col-sm-6 col-xs-12 mb-5" style="width: 18rem;">
+          <img class="img-fluid pt-3" width="400" height="400" [src]="'/img/articles/' + article.imgUrl" alt="{{article.articleName}}">
+          <div class="card-body">
+            <h5 class="card-title pb-3">{{ article.articleName }}</h5>
+            <button type="button" class="mt-3 px-4 py-2 bg-blue-500 text-white rounded" (click)="openModal(article)">
+              Je sélectionne
+            </button>
+          </div>
         </div>
+      </div>
     </div>
-</section>
+  </section>
+  
+  
+  
 
 <!-- modal -->
 <div *ngIf="articleSelected" class="modal fade show d-flex justify-content-center align-items-center" tabindex="-1"

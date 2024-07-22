@@ -1,19 +1,20 @@
 import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ArticlesService } from '../shared/services/articles.service';
-import { Article, Category, Fabric, Service, Item } from '../shared/entities/entities';
 import { NgFor, NgIf } from '@angular/common';
-import { Subscription } from 'rxjs';
-import { CategoriesService } from '../shared/services/categories.service';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { ArticlesService } from '../shared/services/articles.service';
+import { CategoriesService } from '../shared/services/categories.service';
 import { FabricService } from '../shared/services/fabric.service';
 import { ServicesService } from '../shared/services/services.service';
+import { Article, Category, Fabric, Service, Item } from '../shared/entities/entities';
+import { CategoryFilterPipe } from '../category-filter.pipe';
 
 @Component({
   selector: 'app-articles',
   standalone: true,
-  imports: [NgFor, FormsModule, NgIf, RouterModule],
+  imports: [NgFor, FormsModule, NgIf, RouterModule, CategoryFilterPipe], // Ajoutez le pipe ici
   templateUrl: './articles.component.html',
   styleUrls: ['./articles.component.css']
 })
@@ -31,7 +32,7 @@ export class ArticlesComponent implements OnInit, OnDestroy {
   selectedServices: Service[] = [];
   count: number = 0;
   panier: Item[] = [];
-  selectedCategory: Category | null = null;
+  selectedCategory: number | null = null;
 
   @ViewChild('inputQt', { static: true }) inputQt!: ElementRef;
   @Output() close = new EventEmitter<void>();
@@ -53,6 +54,7 @@ export class ArticlesComponent implements OnInit, OnDestroy {
     this.fetchServices();
     this.loadCartFromSession();
   }
+  
 
   fetchArticles(): void {
     this.dataArticles = this.articlesService.getAll().subscribe((data) => {
@@ -156,5 +158,9 @@ export class ArticlesComponent implements OnInit, OnDestroy {
       this.panier = JSON.parse(savedCart);
       console.log('Panier chargé de la session:', this.panier);
     }
+  }
+
+  selectCategory(categoryId: number | null): void {
+    this.selectedCategory = categoryId;
   }
 }

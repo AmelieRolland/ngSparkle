@@ -35,11 +35,11 @@ export class CartComponent implements OnInit {
         } else {
           return {
             quantity: item.quantity,
-            price: 0, // Default price for items without service
-            subTotal: 0, // Default subTotal for items without service
+            price: 0, 
+            subTotal: 0, 
             articleName: item.articleName || '',
             fabricName: item.fabricName || '',
-            serviceName: '', // Default service name for items without service
+            serviceName: '', 
           };
         }
       });
@@ -78,6 +78,7 @@ export class CartComponent implements OnInit {
 
   updateSubTotal(item: CartItem) {
     item.subTotal = item.quantity * item.price;
+    this.saveCartToSession();
   }
 
   calculateTotal() {

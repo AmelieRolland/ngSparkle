@@ -8,6 +8,7 @@ import { JwtInterceptor, jwtInterceptorProvider } from './jwt.interceptor';
 import { ApiService } from './shared/services/api.service';
 import { AuthService } from './shared/services/auth/auth.service';
 import { authInterceptor } from './interceptor/auth.interceptor';
+import { CategoryFilterPipe } from './category-filter.pipe';
 
 
 export const appConfig: ApplicationConfig = {
