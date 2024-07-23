@@ -1,10 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [],
+  imports: [RouterOutlet, RouterLink],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })
