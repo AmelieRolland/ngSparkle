@@ -2,9 +2,16 @@ export interface Article {
     id: number;
     articleName: string;
     coeff: number;
-    idCategory: number;
+    idCategory: string;
     imgUrl: string;
 }
+
+export interface NewArticle {
+    articleName: string;
+    coeff: number;
+    idCategory: string;
+    imgUrl: string;
+  }
 
 export interface Category {
     id: number;

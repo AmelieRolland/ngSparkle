@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Article } from '../entities/entities';
+import { Article, NewArticle } from '../entities/entities';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
@@ -22,8 +22,8 @@ export class ArticlesService {
     return this.http.get<Article>(`${this.apiUrl}/${id}`);
   }
 
-  create(Article: Article): Observable<Article> {
-    return this.http.post<Article>(this.apiUrl, Article);
+  create(article: NewArticle): Observable<Article> {
+    return this.http.post<Article>(this.apiUrl, article);
   }
 
   update(id: number, Article: Article): Observable<Article> {

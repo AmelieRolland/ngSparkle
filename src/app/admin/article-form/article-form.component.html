@@ -10,8 +10,10 @@
         <input type="number" class="form-control" id="coeff" [(ngModel)]="article.coeff" name="coeff" required>
       </div>
       <div class="mb-3">
-        <label for="idCategory" class="form-label">ID Catégorie</label>
-        <input type="number" class="form-control" id="idCategory" [(ngModel)]="article.idCategory" name="idCategory" required>
+        <label for="idCategory" class="form-label">Catégorie</label>
+        <select class="form-control" id="idCategory" [(ngModel)]="article.idCategory" name="idCategory" required>
+          <option *ngFor="let category of categories" [value]="category.id">{{ category.categoryName }}</option>
+        </select>
       </div>
       <div class="mb-3">
         <label for="imgUrl" class="form-label">URL de l'image</label>
