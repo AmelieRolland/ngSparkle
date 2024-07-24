@@ -27,22 +27,19 @@ export class ArticleFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Initialiser le formulaire
+
     this.initializeForm();
-    
-    // Charger les catégories
     this.loadCategories();
     
-    // Récupérer l'ID de l'article
+    // Récupération l'ID de l'article
     this.articleId = this.route.snapshot.params['id'] ? +this.route.snapshot.params['id'] : null;
     
-    // Si articleId est présent, charger les données de l'article
+    // Si articleId est présent, alors ça sera un update et je charge les données de l'article
     if (this.articleId) {
       this.loadArticle();
     }
   }
 
-  // Initialiser le formulaire
   initializeForm(): void {
     this.createArticleForm = this.fb.group({
       articleName: ['', Validators.required],
@@ -52,14 +49,13 @@ export class ArticleFormComponent implements OnInit {
     });
   }
 
-  // Charger les catégories
+  // Charge les options de catégories
   loadCategories(): void {
     this.categoriesService.getAll().subscribe((data) => {
       this.categories = data;
     });
   }
 
-  // Charger les données de l'article
   loadArticle(): void {
     this.articlesService.getById(this.articleId!).subscribe((data) => {
       this.createArticleForm.patchValue({
@@ -71,7 +67,7 @@ export class ArticleFormComponent implements OnInit {
     });
   }
 
-  // Extraire l'ID de la catégorie
+ 
   extractCategoryId(categoryUrl: string): string {
     if (!categoryUrl) {
       console.error('Category URL is undefined or empty');
@@ -81,7 +77,6 @@ export class ArticleFormComponent implements OnInit {
     return parts.pop() || '';
   }
 
-  // Soumettre le formulaire
   onSubmit(): void {
     const formValues = this.createArticleForm.value;
     const articleToSubmit: NewArticle = {
@@ -92,13 +87,13 @@ export class ArticleFormComponent implements OnInit {
     };
 
     if (this.articleId) {
-      // Si articleId est présent, mettre à jour l'article
+      // Si articleId est présent, ça sera un update de l'article
       this.articlesService.update(this.articleId, { ...articleToSubmit, id: this.articleId }).subscribe({
         next: () => this.router.navigate(['/admin/articles']),
         error: (err) => console.error('Erreur lors de la modification de l\'article:', err)
       });
     } else {
-      // Sinon, créer un nouvel article
+      // Sinon, on part sur une création
       this.articlesService.create(articleToSubmit).subscribe({
         next: () => this.router.navigate(['/admin/articles']),
         error: (err) => console.error('Erreur lors de la création de l\'article:', err)
