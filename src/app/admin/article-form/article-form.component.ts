@@ -56,23 +56,22 @@ export class ArticleFormComponent implements OnInit {
     const articleToSubmit: NewArticle = {
       articleName: this.article.articleName!,
       coeff: this.article.coeff!,
-      idCategory: `/api/categories/${this.article.idCategory}`,  // Convertir ID en URL
+      idCategory: `/api/categories/${this.article.idCategory}`, 
       imgUrl: this.article.imgUrl!
     };
 
-    console.log('Submitting article:', articleToSubmit); // Déboguer
 
     if (this.articleId) {
       // Si ID, alors update :
       this.articlesService.update(this.articleId, { ...articleToSubmit, id: this.articleId }).subscribe({
         next: () => this.router.navigate(['/admin/articles']),
-        error: (err) => console.error('Error updating article:', err) // Déboguer
+        error: (err) => console.error('Erreur lors de la modification de l\'article:', err)
       });
     } else {
       // Création
       this.articlesService.create(articleToSubmit).subscribe({
         next: () => this.router.navigate(['/admin/articles']),
-        error: (err) => console.error('Error creating article:', err) // Déboguer
+        error: (err) => console.error('Erreur lors de la création de l\'article:', err)
       });
     }
   }
