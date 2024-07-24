@@ -1,25 +1,24 @@
 <div class="container">
-    <h2>{{ articleId ? 'Modifier' : 'Ajouter' }} un article</h2>
-    <form (ngSubmit)="onSubmit()">
-      <div class="mb-3">
-        <label for="articleName" class="form-label">Nom de l'article</label>
-        <input type="text" class="form-control" id="articleName" [(ngModel)]="article.articleName" name="articleName" required>
-      </div>
-      <div class="mb-3">
-        <label for="coeff" class="form-label">Coefficient</label>
-        <input type="number" class="form-control" id="coeff" [(ngModel)]="article.coeff" name="coeff" required>
-      </div>
-      <div class="mb-3">
-        <label for="idCategory" class="form-label">Catégorie</label>
-        <select class="form-control" id="idCategory" [(ngModel)]="article.idCategory" name="idCategory" required>
-          <option *ngFor="let category of categories" [value]="category.id">{{ category.categoryName }}</option>
-        </select>
-      </div>
-      <div class="mb-3">
-        <label for="imgUrl" class="form-label">URL de l'image</label>
-        <input type="text" class="form-control" id="imgUrl" [(ngModel)]="article.imgUrl" name="imgUrl" required>
-      </div>
-      <button type="submit" class="btn btn-primary">{{ articleId ? 'Modifier' : 'Ajouter' }}</button>
-    </form>
-  </div>
-  
+  <h2>{{ articleId ? 'Modifier' : 'Ajouter' }} un article</h2>
+  <form [formGroup]="createArticleForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="articleName" class="form-label">Nom de l'article</label>
+      <input type="text" class="form-control" id="articleName" formControlName="articleName" required>
+    </div>
+    <div class="mb-3">
+      <label for="coeff" class="form-label">Coefficient</label>
+      <input type="number" class="form-control" id="coeff" formControlName="coeff" required>
+    </div>
+    <div class="mb-3">
+      <label for="idCategory" class="form-label">Catégorie</label>
+      <select class="form-control" id="idCategory" formControlName="idCategory" required>
+        <option *ngFor="let category of categories" [value]="category.id">{{ category.categoryName }}</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="imgUrl" class="form-label">URL de l'image</label>
+      <input type="text" class="form-control" id="imgUrl" formControlName="imgUrl" required>
+    </div>
+    <button type="submit" class="btn btn-primary">{{ articleId ? 'Modifier' : 'Ajouter' }}</button>
+  </form>
+</div>
