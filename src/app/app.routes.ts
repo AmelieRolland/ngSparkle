@@ -15,6 +15,8 @@ import { EmployesComponent } from './admin/employes/employes.component';
 import { ArticlesListComponent } from './admin/articles-list/articles-list.component';
 import { ArticleFormComponent } from './admin/article-form/article-form.component';
 import { OrdersComponent } from './admin/orders/orders.component';
+import { FabricFormComponent } from './admin/fabric-form/fabric-form.component';
+import { ServiceFormComponent } from './admin/service-form/service-form.component';
 
 export const routes: Routes = [
     { path: '', component : AccueilComponent},
@@ -31,6 +33,10 @@ export const routes: Routes = [
         { path: 'articles', component: ArticlesListComponent },
         { path: 'articles/new', component: ArticleFormComponent },
         { path: 'articles/modifier/:id', component: ArticleFormComponent },
+        { path: 'fabrics/new', component: FabricFormComponent },
+        { path: 'fabrics/modifier/:id', component: FabricFormComponent },
+        { path: 'service/new', component: ServiceFormComponent },
+        { path: 'service/modifier/:id', component: ServiceFormComponent },
         { path: 'employes', component: EmployesComponent },
         { path: '', redirectTo: 'commandes', pathMatch: 'full' },
       ]},

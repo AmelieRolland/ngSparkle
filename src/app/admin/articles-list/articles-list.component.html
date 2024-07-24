@@ -26,36 +26,48 @@
 
 <h2>Matières disponibles</h2>
 <section>
-  <div class="container fond-clair">
-    <div class="row d-flex flex-wrap justify-content-between">
-      <div class="card col-lg-2 col-md-4 col-sm-6 col-xs-12 mb-5" style="cursor: pointer;" [routerLink]="['/admin/fabrics/new']">
-        <div class="card-body d-flex align-items-center justify-content-center">
-          <h5 class="card-title text-center">Ajouter une matière</h5>
+    <div class="container fond-clair">
+      <div class="row d-flex flex-wrap justify-content-between">
+        <div class="card col-lg-2 col-md-4 col-sm-6 col-xs-12 mb-5" style="cursor: pointer;" [routerLink]="['/admin/fabrics/new']">
+          <div class="card-body d-flex align-items-center justify-content-center">
+            <h5 class="card-title text-center">Ajouter une matière</h5>
+          </div>
         </div>
-      </div>
-      <div *ngFor="let fabric of fabrics" class="card col-lg-2 col-md-4 col-sm-6 col-xs-12 mb-5">
-        <div class="card-body">
-          <h5 class="card-title pb-3">{{ fabric.fabricName }}</h5>
+        <div *ngFor="let fabric of fabrics" class="card col-lg-2 col-md-4 col-sm-6 col-xs-12 mb-5">
+          <div class="card-body">
+            <h5 class="card-title pb-3">{{ fabric.fabricName }}</h5>
+            <button type="button" class="mt-3 px-4 py-2 bg-blue-500 text-white rounded" [routerLink]="['/admin/fabrics/modifier', fabric.id]">
+              Modifier
+            </button>
+            <button type="button" class="mt-3 px-4 py-2 bg-red-500 text-white rounded" (click)="deleteFabric(fabric.id)">
+              Supprimer
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
 <h2>Services disponibles</h2>
 <section>
-  <div class="container fond-clair">
-    <div class="row d-flex flex-wrap justify-content-between">
-      <div class="card col-lg-2 col-md-4 col-sm-6 col-xs-12 mb-5" style="cursor: pointer;" routerLink="articles/new">
-        <div class="card-body d-flex align-items-center justify-content-center">
-          <h5 class="card-title text-center">Ajouter un service</h5>
+    <div class="container fond-clair">
+      <div class="row d-flex flex-wrap justify-content-between">
+        <div class="card col-lg-2 col-md-4 col-sm-6 col-xs-12 mb-5" style="cursor: pointer;" [routerLink]="['/admin/service/new']">
+          <div class="card-body d-flex align-items-center justify-content-center">
+            <h5 class="card-title text-center">Ajouter un service</h5>
+          </div>
         </div>
-      </div>
-      <div *ngFor="let service of services" class="card col-lg-2 col-md-4 col-sm-6 col-xs-12 mb-5">
-        <div class="card-body">
-          <h5 class="card-title pb-3">{{ service.serviceName }}</h5>
+        <div *ngFor="let service of services" class="card col-lg-2 col-md-4 col-sm-6 col-xs-12 mb-5">
+          <div class="card-body">
+            <h5 class="card-title pb-3">{{ service.serviceName }}</h5>
+            <button type="button" class="mt-3 px-4 py-2 bg-blue-500 text-white rounded" [routerLink]="['/admin/service/modifier', service.id]">
+              Modifier
+            </button>
+            <button type="button" class="mt-3 px-4 py-2 bg-red-500 text-white rounded" (click)="deleteService(service.id)">
+              Supprimer
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>

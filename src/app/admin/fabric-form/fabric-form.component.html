@@ -1,0 +1,15 @@
+<div class="container">
+    <h2>{{ fabricId ? 'Modifier' : 'Ajouter' }} une matière</h2>
+    <form [formGroup]="fabricForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="fabricName" class="form-label">Nom de la matière</label>
+        <input type="text" class="form-control" id="fabricName" formControlName="fabricName" required>
+      </div>
+      <div class="mb-3">
+        <label for="coeff" class="form-label">Coefficient</label>
+        <input type="number" class="form-control" id="coeff" formControlName="coeff" required>
+      </div>
+      <button type="submit" class="btn btn-primary">{{ fabricId ? 'Modifier' : 'Ajouter' }}</button>
+    </form>
+  </div>
+  

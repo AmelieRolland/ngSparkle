@@ -17,4 +17,21 @@ export class FabricService {
   getFabrics(): Observable<Fabric[]> {
     return this.http.get<Fabric[]>(this.apiUrl);
   }
+
+  getById(id: number): Observable<Fabric> {
+    return this.http.get<Fabric>(`${this.apiUrl}/${id}`);
+  }
+
+  create(fabric: Fabric): Observable<Fabric> {
+    return this.http.post<Fabric>(this.apiUrl, fabric);
+  }
+
+  update(fabric: Fabric): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/${fabric.id}`, fabric);
+  }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
 }

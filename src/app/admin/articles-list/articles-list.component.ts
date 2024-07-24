@@ -26,10 +26,6 @@ export class ArticlesListComponent {
 
   private subscriptions: Subscription = new Subscription();
 
-  // dataArticles!: Subscription;
-  // dataCategories!: Subscription;
-  // dataFabrics!: Subscription;
-  // dataServices!: Subscription;
 
   constructor(
     private titleService: Title,
@@ -61,9 +57,27 @@ export class ArticlesListComponent {
   }
 
   deleteArticle(id: number): void {
-    this.articlesService.delete(id).subscribe(() => {
-      this.articles = this.articles.filter(article => article.id !== id);
-    });
+    if (confirm('Êtes-vous sûr de vouloir supprimer cet article ?')) {
+      this.articlesService.delete(id).subscribe(() => {
+        this.articles = this.articles.filter(article => article.id !== id);
+      });
+    }
+  }
+
+  deleteFabric(id: number): void {
+    if (confirm('Êtes-vous sûr de vouloir supprimer cette matière ?')) {
+      this.fabricService.delete(id).subscribe(() => {
+        this.fabrics = this.fabrics.filter(fabric => fabric.id !== id);
+      });
+    }
+  }
+
+  deleteService(id: number): void {
+    if (confirm('Êtes-vous sûr de vouloir supprimer ce service ?')) {
+      this.servicesService.deleteService(id).subscribe(() => {
+        this.services = this.services.filter(service => service.id !== id);
+      });
+    }
   }
 
   ngOnDestroy(): void {

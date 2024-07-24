@@ -1,1 +1,12 @@
-<p>service-form works!</p>
+<h2>{{ serviceId ? 'Modifier' : 'Ajouter' }} un service</h2>
+<form [formGroup]="serviceForm" (ngSubmit)="onSubmit()">
+  <div class="mb-3">
+    <label for="serviceName" class="form-label">Nom du service</label>
+    <input type="text" class="form-control" id="serviceName" formControlName="serviceName" required>
+  </div>
+  <div class="mb-3">
+    <label for="price" class="form-label">Prix</label>
+    <input type="number" class="form-control" id="price" formControlName="price" required>
+  </div>
+  <button type="submit" class="btn btn-primary">{{ serviceId ? 'Modifier' : 'Ajouter' }}</button>
+</form>
