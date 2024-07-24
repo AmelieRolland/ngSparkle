@@ -40,13 +40,15 @@ export class ArticleFormComponent implements OnInit {
       });
     }
   }
-
+  
+  //Pour afficher les options de catégories
   loadCategories(): void {
     this.categoriesService.getAll().subscribe((data) => {
       this.categories = data;
     });
   }
 
+  //Pour récupérer l'id de la catégorie
   extractCategoryId(categoryUrl: string): string {
     const parts = categoryUrl.split('/');
     return parts.pop() || '';
