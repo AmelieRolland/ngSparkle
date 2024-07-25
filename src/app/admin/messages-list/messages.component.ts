@@ -45,5 +45,14 @@ export class MessagesComponent {
   openMessage(messageId: number): void {
     this.markAsRead(messageId);
     this.router.navigate(['/admin/messages', messageId]); 
+    
+  }
+
+  deleteMessage(messageId: number): void {
+    if (confirm('Êtes-vous sûr de vouloir supprimer ce message ?')) {
+      this.messageService.deleteMessage(messageId).subscribe(() => {
+        this.loadMessages(); 
+      });
+    }
   }
 }

@@ -35,4 +35,8 @@ export class MessageService {
   getUnreadMessagesCount(): Observable<number> {
     return this.http.get<number>(`${this.apiUrl}/unread-count`);
   }
+
+  deleteMessage(messageId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${messageId}`);
+  }
 }
