@@ -19,22 +19,25 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" [routerLink]="['/admin/commandes']">
-                            <i class="bi bi-house"></i> Commandes
+                            <i class="bi bi-house"></i> Commandes 🎉
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" [routerLink]="['/admin/messages']">
-                            <i class="bi bi-chat"></i> Messages
+                            <i class="bi bi-chat"></i> Messages 💌
+                            <span class="badge bg-danger position-absolute top-0 start-100 translate-middle p-2 rounded-circle">
+                                {{ unreadMessagesCount }}
+                              </span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['/admin/articles']">
-                            <i class="bi bi-bookmarks"></i> Articles
+                        <a class="nav-link text-wrap" [routerLink]="['/admin/articles']">
+                            <i class="bi bi-bookmarks"></i> Gestions des produits et services 🥼
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" [routerLink]="['/admin/employes']">
-                            <i class="bi bi-people"></i> Employés
+                            <i class="bi bi-people"></i> Equipe 🤜🤛
                         </a>
                     </li>
                 </ul>

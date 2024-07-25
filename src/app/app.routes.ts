@@ -10,13 +10,14 @@ import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './shared/services/auth/auth/components/login/login.component';
 import { CartComponent } from './cart/cart.component';
 import { authGuard } from './shared/services/auth/auth.guard';
-import { MessagesComponent } from './admin/messages/messages.component';
+import { MessagesComponent } from './admin/messages-list/messages.component';
 import { EmployesComponent } from './admin/employes/employes.component';
 import { ArticlesListComponent } from './admin/articles-list/articles-list.component';
 import { ArticleFormComponent } from './admin/article-form/article-form.component';
 import { OrdersComponent } from './admin/orders/orders.component';
 import { FabricFormComponent } from './admin/fabric-form/fabric-form.component';
 import { ServiceFormComponent } from './admin/service-form/service-form.component';
+import { MessageComponent } from './admin/message/message.component';
 
 export const routes: Routes = [
     { path: '', component : AccueilComponent},
@@ -30,6 +31,7 @@ export const routes: Routes = [
     { path: 'admin',component: AdminComponent, canActivate: [authGuard], children: [
         { path: 'commandes', component: OrdersComponent},
         { path: 'messages', component: MessagesComponent },
+        { path: 'messages/:id', component: MessageComponent },
         { path: 'articles', component: ArticlesListComponent },
         { path: 'articles/new', component: ArticleFormComponent },
         { path: 'articles/modifier/:id', component: ArticleFormComponent },

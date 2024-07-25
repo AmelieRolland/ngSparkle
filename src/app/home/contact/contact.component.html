@@ -1,71 +1,65 @@
+<!-- src/app/components/contact/contact.component.html -->
 <section class="contact">
-
     <div class="container-fluid bg-h2-vert mx-0 py-4 my-4">
-
-        <div class="container">
-            <h2>Nous contacter</h2>
-        </div>
-
+      <div class="container">
+        <h2>Nous contacter</h2>
+      </div>
     </div>
-
+  
     <div class="container">
-        <div class="row d-flex mt-5">
-
-
-            <div class="col-lg-6">
-
-                <div class="mb-4">
-
-                    <p>Pour toute demande personnalisée, demande de devis, ou pour toute question ou message à nous
-                        faire passer, envoyez nous un message via ce formulaire. Nos équipes s’engagent à vous
-                        répondre dans les 48h.</p>
-
-                    <div id="messageError" class="alert alert-danger d-none" role="alert">
-                        <p id="alertText"></p>
-                    </div>
-
-                    <form id="form" action="">
-                        <div class="mb-5">
-                            <label for="name" class="form-label d-none">Votre nom</label>
-                            <input type="text" class="form-control" id="form-name" placeholder="Mon nom">
-                        </div>
-
-                        <div class="mb-5">
-                            <label for="email" class="form-label d-none">Email address</label>
-                            <input type="email" class="form-control" id="form-email" placeholder="Mon e-mail">
-                        </div>
-
-                        <div class="mb-5">
-                            <label for="txt-area" class="form-label d-none">Message</label>
-                            <textarea class="form-control" id="form-message" placeholder="Mon message"
-                                rows="5"></textarea>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary px-5 py-2">Envoyer</button>
-
-
-                    </form>
-                </div>
+      <div class="row d-flex mt-5">
+        <div class="col-lg-6">
+          <div class="mb-4">
+            <p>Pour toute demande personnalisée, demande de devis, ou pour toute question ou message à nous
+              faire passer, envoyez nous un message via ce formulaire. Nos équipes s’engagent à vous
+              répondre dans les 48h.</p>
+  
+            <div *ngIf="successMessage" class="alert alert-success" role="alert">
+              {{ successMessage }}
             </div>
-
-            <div class="col-lg-6">
-                <div class="mb-4 d-flex justify-content-end">
-
-                    <div>
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11134.39232732714!2d4.823271716414536!3d45.75920293728153!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f4ea537bdc5ab3%3A0x5d9d9385f58b2047!2sPlace%20Bellecour!5e0!3m2!1sfr!2sfr!4v1707122803127!5m2!1sfr!2sfr"
-                            width="500" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
-
-                </div>
+  
+            <div id="messageError" class="alert alert-danger d-none" role="alert">
+              <p id="alertText"></p>
             </div>
-
-
-
-
+  
+            <form id="form" (ngSubmit)="sendMessage()">
+              <div class="mb-5">
+                <label for="name" class="form-label d-none">Votre nom</label>
+                <input type="text" class="form-control" id="form-name" [(ngModel)]="newMessage.senderName" name="senderName" placeholder="Mon nom">
+              </div>
+  
+              <div class="mb-5">
+                <label for="firstname" class="form-label d-none">Votre prénom</label>
+                <input type="text" class="form-control" id="form-firstname" [(ngModel)]="newMessage.senderFirstName" name="senderFirstName" placeholder="Mon prénom">
+              </div>
+  
+              <div class="mb-5">
+                <label for="email" class="form-label d-none">Email address</label>
+                <input type="email" class="form-control" id="form-email" [(ngModel)]="newMessage.senderEmail" name="senderEmail" placeholder="Mon e-mail">
+              </div>
+  
+              <div class="mb-5">
+                <label for="txt-area" class="form-label d-none">Message</label>
+                <textarea class="form-control" id="form-message" [(ngModel)]="newMessage.content" name="content" placeholder="Mon message"
+                  rows="5"></textarea>
+              </div>
+  
+              <button type="submit" class="btn btn-primary px-5 py-2">Envoyer</button>
+            </form>
+          </div>
         </div>
-
+  
+        <div class="col-lg-6">
+          <div class="mb-4 d-flex justify-content-end">
+            <div>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11134.39232732714!2d4.823271716414536!3d45.75920293728153!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f4ea537bdc5ab3%3A0x5d9d9385f58b2047!2sPlace%20Bellecour!5e0!3m2!1sfr!2sfr!4v1707122803127!5m2!1sfr!2sfr"
+                width="500" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
-</section>
+  </section>
+  

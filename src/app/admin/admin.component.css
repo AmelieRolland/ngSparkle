@@ -10,3 +10,11 @@
 body {
     padding-top: 0;
 }
+.nav-item {
+    position: relative;
+  }
+  
+  .badge {
+    font-size: 0.75rem; 
+    padding: 0.5em 0.75em;
+  }

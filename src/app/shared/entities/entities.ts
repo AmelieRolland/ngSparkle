@@ -85,4 +85,15 @@ export interface CartItem {
     fabricName: string;
     serviceName: string;
   }
+
+  export interface Message {
+    id: number;
+    senderName: string;
+    senderFirstName: string;
+    senderEmail: string;
+    content: string;
+    createdAt: string;
+    isRead: boolean; 
+  }
+  
   
