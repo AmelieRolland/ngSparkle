@@ -20,7 +20,11 @@ export class AdminComponent {
   constructor(private titleService: Title, private messageService: MessageService) { }
 
   ngOnInit(): void {
+    this.messageService.getUnreadMessagesCount().subscribe(count => {
+      this.unreadMessagesCount = count;
+    });
     this.titleService.setTitle('Dashboard');
+    
     this.loadMessages();
   }
 
@@ -32,6 +36,6 @@ export class AdminComponent {
   }
 
   calculateUnreadMessagesCount(): void {
-    this.unreadMessagesCount = this.messages.filter(message => !message.isRead).length;
+    this.unreadMessagesCount = this.messages.filter(message => !message.read).length;
   }
 }

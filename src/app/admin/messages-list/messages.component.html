@@ -4,14 +4,14 @@
       <div class="col-12">
         <h3>Messages reçus</h3>
         <ul class="list-group">
-          <li class="list-group-item" *ngFor="let message of messages" [ngClass]="{'bg-light': !message.isRead}">
+          <li class="list-group-item" *ngFor="let message of messages" [ngClass]="{'bg-light': !message.read}">
             <strong>{{ message.senderName }} {{ message.senderFirstName }}</strong>:
             {{ message.content | slice: 0:50 }}...
             <br />
             <small>Email: {{ message.senderEmail }}</small>
             <br />
             <small>{{ message.createdAt | date: 'short' }}</small>
-            <button *ngIf="!message.isRead" class="btn btn-primary btn-sm float-end" (click)="openMessage(message.id)">
+            <button *ngIf="!message.read" class="btn btn-primary btn-sm float-end" (click)="openMessage(message.id)">
               Ouvrir
             </button>
             <button class="btn btn-danger btn-sm float-end" (click)="deleteMessage(message.id)">

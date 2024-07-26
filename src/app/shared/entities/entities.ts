@@ -93,7 +93,7 @@ export interface CartItem {
     senderEmail: string;
     content: string;
     createdAt: string;
-    isRead: boolean; 
+    read: boolean; 
   }
   
   

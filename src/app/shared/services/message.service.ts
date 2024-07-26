@@ -1,6 +1,6 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Message } from '../entities/entities';
 
@@ -9,6 +9,7 @@ import { Message } from '../entities/entities';
 })
 export class MessageService {
   private apiUrl = environment.apiUrl + '/messages';
+  private unreadMessagesCount = new BehaviorSubject<number>(0);
 
   constructor(private http: HttpClient) { }
 
@@ -29,11 +30,18 @@ export class MessageService {
   }
 
   markAsRead(messageId: number): Observable<any> {
-    return this.http.patch(`${this.apiUrl}/${messageId}`, { isRead: true });
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/merge-patch+json'
+    });
+    return this.http.patch(`${this.apiUrl}/${messageId}`, { read: true }, { headers });
   }
 
   getUnreadMessagesCount(): Observable<number> {
-    return this.http.get<number>(`${this.apiUrl}/unread-count`);
+    return this.unreadMessagesCount.asObservable();
+  }
+
+  updateUnreadMessagesCount(count: number): void {
+    this.unreadMessagesCount.next(count);
   }
 
   deleteMessage(messageId: number): Observable<void> {
