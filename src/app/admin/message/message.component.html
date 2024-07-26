@@ -1,7 +1,7 @@
-<div *ngIf="message" class="message-detail">
-    <h3>Message de {{ message.senderName }} {{ message.senderFirstName }}</h3>
-    <p><strong>Contenu:</strong> {{ message.content }}</p>
-    <p><strong>Email:</strong> {{ message.senderEmail }}</p>
+<div *ngIf="message" class="message-detail" ngClass="container">
+    <h3 class="py-16">Message de {{ message.senderName }} {{ message.senderFirstName }}</h3> 
+    <p><strong>Emmeteur:</strong> {{ message.senderEmail }}</p>
     <p><strong>Date:</strong> {{ message.createdAt | date: 'short' }}</p>
+    <p class="pt-16"><strong>Contenu:</strong> {{ message.content }}</p>
   </div>
   
