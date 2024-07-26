@@ -50,7 +50,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
     this.messageService.markAsRead(messageId).subscribe(() => {
       const message = this.messages.find(msg => msg.id === messageId);
       if (message) {
-        message.read = true; // Utiliser read
+        message.read = true; 
         this.updateUnreadMessagesCount();
       }
     });
