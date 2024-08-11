@@ -71,12 +71,6 @@ export interface IUser{
     registration_date: Date;
 }
 
-export interface CartItem {
-    quantity: number;
-    price: number;
-    subTotal: number;
-  }
-
   export interface CartItem {
     quantity: number;
     price: number;
