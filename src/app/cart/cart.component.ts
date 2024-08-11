@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CartItem } from '../shared/entities/entities';
+import { Article, CartItem, Fabric, Service } from '../shared/entities/entities';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -47,16 +47,17 @@ export class CartComponent implements OnInit {
     }
   }
 
-  addItem(pricePerUnit: number, articleName: string, fabricName: string, serviceName: string) {
+  addItem(article: Article, fabric: Fabric, service: Service) {
+    const pricePerUnit = service.price * article.coeff * fabric.coeff;
     const newItem: CartItem = {
       quantity: 1,
       price: pricePerUnit,
       subTotal: pricePerUnit,
-      articleName: articleName,
-      fabricName: fabricName,
-      serviceName: serviceName,
+      articleName: article.articleName,
+      fabricName: fabric.fabricName,
+      serviceName: service.serviceName,
     };
-
+  
     this.cart.push(newItem);
     this.saveCartToSession();
     this.calculateTotal();
