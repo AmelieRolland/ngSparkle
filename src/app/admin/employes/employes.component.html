@@ -1,1 +1,45 @@
-<p>employes works!</p>
+<div class="container">
+    <h2>Inscription Employé</h2>
+    <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="gender">Genre</label>
+        <select id="gender" formControlName="gender" class="form-control">
+          <option *ngFor="let gender of genders" [value]="gender.id">{{ gender.genderName }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="name">Nom</label>
+        <input id="name" formControlName="name" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="surname">Prénom</label>
+        <input id="surname" formControlName="surname" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" formControlName="email" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <input id="password" type="password" formControlName="password" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirmer le mot de passe</label>
+        <input id="confirmPassword" type="password" formControlName="confirmPassword" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="phone">Téléphone</label>
+        <input id="phone" formControlName="phone" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="birthday">Date de naissance</label>
+        <input id="birthday" type="date" formControlName="birthday" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="direction">Direction</label>
+        <input id="direction" formControlName="direction" class="form-control" />
+      </div>
+      <button type="submit" class="btn btn-primary">S'inscrire</button>
+    </form>
+  </div>
+  

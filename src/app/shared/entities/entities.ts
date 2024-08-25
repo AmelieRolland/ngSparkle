@@ -70,6 +70,9 @@ export interface IUser{
     gender: Gender;
     registration_date: Date;
 }
+export interface Employee extends IUser {
+    roles: string[]; 
+  }
 
   export interface CartItem {
     quantity: number;

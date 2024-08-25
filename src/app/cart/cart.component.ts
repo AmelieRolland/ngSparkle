@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Article, CartItem, Fabric, Service } from '../shared/entities/entities';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-cart',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
   standalone: true,
@@ -12,6 +13,28 @@ import { CommonModule } from '@angular/common';
 export class CartComponent implements OnInit {
   cart: CartItem[] = [];
   total = 0;
+  deliveryDate: string = '';
+  deliverySlot: string = '';
+  dropOffDate: string = '';
+
+  saveDatesToSession(): void {
+    const deliveryInfo = {
+      deliveryDate: this.deliveryDate,
+      deliverySlot: this.deliverySlot,
+      dropOffDate: this.dropOffDate,
+    };
+    sessionStorage.setItem('deliveryInfo', JSON.stringify(deliveryInfo));
+  }
+
+  loadDatesFromSession(): void {
+    const savedDeliveryInfo = sessionStorage.getItem('deliveryInfo');
+    if (savedDeliveryInfo) {
+      const parsedInfo = JSON.parse(savedDeliveryInfo);
+      this.deliveryDate = parsedInfo.deliveryDate || '';
+      this.deliverySlot = parsedInfo.deliverySlot || '';
+      this.dropOffDate = parsedInfo.dropOffDate || '';
+    }
+  }
 
   ngOnInit(): void {
     this.loadCartFromSession();

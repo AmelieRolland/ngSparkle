@@ -7,7 +7,7 @@
           <div>
             <h4>{{ item.articleName }} en {{ item.fabricName }}</h4>
             <p>Service : {{ item.serviceName }}</p>
-            <a class="me-4" href="#" (click)="removeItem(i)">supprimer</a>
+            <a class="me-4" (click)="removeItem(i)">supprimer</a>
           </div>
           <div>
             <p class="mb-0 me-2">Quantité :</p>
@@ -26,9 +26,28 @@
       </div>
 
       <div class="col-lg-4">
+        <div class="border p-3">
+          <h4>Date de dépôt à domicile :</h4>
+          <input type="date" [(ngModel)]="dropOffDate" (change)="saveDatesToSession()" class="form-control mb-3">
+
+          <h4>Date de livraison souhaitée :</h4>
+          <input type="date" [(ngModel)]="deliveryDate" (change)="saveDatesToSession()" class="form-control mb-3">
+
+          <h4>Créneau horaire souhaité :</h4>
+          <select [(ngModel)]="deliverySlot" (change)="saveDatesToSession()" class="form-control">
+            <option value="">Sélectionnez un créneau horaire</option>
+            <option value="08:00-10:00">08:00 - 10:00</option>
+            <option value="10:00-12:00">10:00 - 12:00</option>
+            <option value="12:00-14:00">12:00 - 14:00</option>
+            <option value="14:00-16:00">14:00 - 16:00</option>
+            <option value="16:00-18:00">16:00 - 18:00</option>
+            <option value="18:00-20:00">18:00 - 20:00</option>
+          </select>
+        </div>
         <div class="border">
           <h3>Total : {{ total }} €</h3>
         </div>
+        
       </div>
     </div>
   </div>
