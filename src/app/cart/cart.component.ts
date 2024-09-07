@@ -150,7 +150,6 @@ export class CartComponent implements OnInit {
       const itemIds = createdItems
     .map(item => `/api/items/${item['id']}`)
     .filter(id => id !== undefined)
-  console.log('Item IRIs:', itemIds)
   
       if (itemIds.length === 0) {
         console.error('Aucun item valide n\'a été créé.');
@@ -180,7 +179,7 @@ export class CartComponent implements OnInit {
           const updateItemsObservables = createdItems.map(item => {
             const itemToUpdate = {
               ...item,
-              order: createdOrderId // Lier la commande à chaque item
+              order: createdOrderId //ici je lie la commande à chaque item
             };
             return this.orderService.updateItem(item['@id'], itemToUpdate);
           });

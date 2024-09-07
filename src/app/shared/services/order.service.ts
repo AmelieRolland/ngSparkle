@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment';
 })
 export class OrderService {
   private apiUrl = environment.apiUrl + '/orders'; 
-  private itemsApiUrl = environment.apiUrl + '/items'; // Assurez-vous que l'URL est correcte
+  private itemsApiUrl = environment.apiUrl + '/items';
 
   constructor(private http: HttpClient) {}
 
@@ -38,7 +38,6 @@ export class OrderService {
       price: cartItem.price
     };
   
-    console.log('Item à créer:', item);
     return this.http.post('http://localhost:8000/api/items', item);
   }
   
