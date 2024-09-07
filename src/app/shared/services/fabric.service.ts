@@ -34,4 +34,9 @@ export class FabricService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
+  getByName(name: string): Observable<Fabric[]> {
+    return this.http.get<Fabric[]>(`${this.apiUrl}?name=${name}`);
+  }
+  
+
 }

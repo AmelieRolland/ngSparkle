@@ -33,8 +33,9 @@ export class LoginComponent implements OnInit {
      const { username, password } = this.loginForm.value.credentials;
      this.authService.login({ username, password }).subscribe(
        (token) => {
-         console.log('Token received:', token); 
          this.authService.saveToken(token.token);
+
+         
          this.router.navigate(['/admin']); 
          console.log(username)
        },

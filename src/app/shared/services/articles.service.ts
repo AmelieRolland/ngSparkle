@@ -33,4 +33,8 @@ export class ArticlesService {
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
+  getByName(name: string): Observable<Article[]> {
+    return this.http.get<Article[]>(`${this.apiUrl}?name=${name}`);
+  }
 }

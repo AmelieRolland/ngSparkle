@@ -32,4 +32,8 @@ export class ServicesService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
+  getByName(name: string): Observable<Service[]> {
+    return this.http.get<Service[]>(`${this.apiUrl}?name=${name}`);
+  }
+
 }

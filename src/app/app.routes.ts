@@ -18,6 +18,7 @@ import { OrdersComponent } from './admin/orders/orders.component';
 import { FabricFormComponent } from './admin/fabric-form/fabric-form.component';
 import { ServiceFormComponent } from './admin/service-form/service-form.component';
 import { MessageComponent } from './admin/message/message.component';
+import { UserAccountComponent } from './User/user-account/user-account.component';
 
 export const routes: Routes = [
     { path: '', component : AccueilComponent},
@@ -28,7 +29,8 @@ export const routes: Routes = [
     { path: 'articles', component : ArticlesComponent},
     { path: 'login/inscription', component : InscriptionComponent},
     { path: 'login', component : LoginComponent},
-    { path: 'admin',component: AdminComponent, canActivate: [authGuard], children: [
+    { path: 'mon-compte', component: UserAccountComponent, canActivate: [authGuard], data: { roles: 'ROLE_USER'}},
+    { path: 'admin',component: AdminComponent, canActivate: [authGuard], data: { roles: 'ROLE_ADMIN'}, children: [
         { path: 'commandes', component: OrdersComponent},
         { path: 'messages', component: MessagesComponent },
         { path: 'messages/:id', component: MessageComponent },

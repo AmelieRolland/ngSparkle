@@ -22,7 +22,6 @@ export class ContactComponent {
     this.messageService.postMessage(this.newMessage).subscribe(() => {
       this.successMessage = 'Message envoyé avec succès';
       this.newMessage = { senderName: '', senderFirstName: '', senderEmail: '', content: ''};
-      console.log(this.newMessage);
 
       setTimeout(() => {
         this.successMessage = '';

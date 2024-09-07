@@ -4,9 +4,13 @@ import { isPlatformBrowser } from '@angular/common';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
+import { IUser, } from '../../entities/entities';
+import { jwtDecode } from 'jwt-decode';
+
 
 export interface IToken {
   token: string;
+  exp:number 
 }
 
 @Injectable({
@@ -26,8 +30,14 @@ export class AuthService {
   }
 
   isLogged(): boolean {
-    const token = localStorage.getItem('token');
-    return !!token;
+    const token = this.getToken();
+    if (!token) return false;
+    try {
+      const decodedToken = jwtDecode<IToken>(token);
+      return decodedToken.exp > Date.now() / 1000;
+    } catch (error) {
+      return false;
+    }
   }
 
   getToken(): string | null {
@@ -39,7 +49,6 @@ export class AuthService {
     this.router.navigate(['login']);
   }
 
-  getUserInfo(){
 
-  }
+
 }

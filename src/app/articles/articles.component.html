@@ -68,8 +68,8 @@
                 </div>
             </div>
             <div class="text-end">
-                <p><strong>Prix TTC : € </strong></p>
-                <div class="modal-footer">
+              <p><strong>Prix TTC : € {{ calculateTotalPrice() | number: '1.2-2' }}</strong></p> <!-- Affichage dynamique du prix total -->
+              <div class="modal-footer">
                     <button type="button" class="btn btn-primary" (click)="addToCart()">Ajouter au panier</button>
                 </div>
             </div>
