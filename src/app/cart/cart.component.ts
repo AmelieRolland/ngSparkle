@@ -3,10 +3,11 @@ import { Article, CartItem, Fabric, Item, Order, Service } from '../shared/entit
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { OrderService } from '../shared/services/order.service';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterOutlet, RouterLink],
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
   standalone: true,
@@ -36,7 +37,7 @@ export class CartComponent implements OnInit {
       this.dropOffDate = parsedInfo.dropOffDate || '';
     }
   }
-  constructor(private orderService: OrderService) { }
+  constructor(private orderService: OrderService,  private router: Router) { }
 
   ngOnInit(): void {
     this.loadCartFromSession();
@@ -55,49 +56,13 @@ export class CartComponent implements OnInit {
             articleName: item.articleName || '',
             fabricName: item.fabricName || '',
             serviceName: item.serviceName || '',
-            article_id: item.article_id || 0, // Assurez-vous de restaurer l'identifiant de l'article
-            fabric_id: item.fabric_id || 0,   // Assurez-vous de restaurer l'identifiant du tissu
-            service_id: item.service_id || 0, // Assurez-vous de restaurer l'identifiant du service
+            article_id: item.article_id || 0, 
+            fabric_id: item.fabric_id || 0,  
+            service_id: item.service_id || 0, 
         }));
         console.log('Cart loaded from session:', this.cart);
     }
 }
-
-
-
-  // addItem(article: Article, fabric: Fabric, service: Service) {
-  //   console.log('Article:', article);
-  //   console.log('Fabric:', fabric);
-  //   console.log('Service:', service);
-
-  //   if (!article.id || !fabric.id || !service.id) {
-  //     console.error('Invalid item: article, fabric, or service is missing an ID.');
-  //     return;
-  //   }
-
-  //   const pricePerUnit = service.price * article.coeff * fabric.coeff;
-  //   const newItem: CartItem = {
-  //     id: this.cart.length + 1,
-  //     quantity: 1,
-  //     price: pricePerUnit,
-  //     subTotal: pricePerUnit,
-  //     articleName: article.articleName,
-  //     fabricName: fabric.fabricName,
-  //     serviceName: service.serviceName,
-  //     article_id: article.id,
-  //     fabric_id: fabric.id,
-  //     service_id: service.id,
-  //   };
-
-  //   console.log( newItem); 
-
-  //   this.cart.push(newItem);
-  //   this.saveCartToSession();
-  //   this.calculateTotal();
-  // }
-
-
-
 
   increment(item: CartItem) {
     item.quantity++;
@@ -162,7 +127,7 @@ export class CartComponent implements OnInit {
         optionDelivery: true,
         deliveryDate: this.deliveryDate || "",
         status: '/api/statuses/17', 
-        user: '/api/users/15', 
+        user: '/api/users/22', 
         delivery_slot: this.deliverySlot || "",
         drop_off_date: this.dropOffDate || "",
         order_date: new Date().toISOString(),
@@ -190,7 +155,10 @@ export class CartComponent implements OnInit {
           }).catch(error => {
             console.error('Erreur lors de la mise à jour des items:', error);
           });
+          this.router.navigate(['/paiement']);
+
         },
+        
         error => {
           console.error('Erreur lors de la création de la commande:', error);
           if (error.error) {

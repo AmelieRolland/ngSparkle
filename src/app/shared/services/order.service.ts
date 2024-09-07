@@ -44,7 +44,6 @@ export class OrderService {
 
 
   createOrder(order: Order): Observable<any> {
-    console.log('Payload envoyé à l\'API:', order);
     return this.http.post<Order>(this.apiUrl, order);
   }
 

@@ -5,6 +5,9 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { AuthService } from '../../../auth.service';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
+import { userInfo } from 'os';
+import { IUser } from '../../../../../entities/entities';
+import { RedirectService } from '../../../../redirect.service';
 
 @Component({
  selector: 'app-login',
@@ -17,7 +20,7 @@ import { Router, RouterLink } from '@angular/router';
 export class LoginComponent implements OnInit {
  loginForm: FormGroup = new FormGroup({});
 
- constructor(private authService: AuthService, private router: Router) { }
+ constructor(private authService: AuthService, private router: Router, private redirectService : RedirectService) { }
 
  ngOnInit() {
    this.loginForm = new FormGroup({
@@ -29,21 +32,32 @@ export class LoginComponent implements OnInit {
  }
 
  onSubmit() {
-   if (this.loginForm.valid) {
-     const { username, password } = this.loginForm.value.credentials;
-     this.authService.login({ username, password }).subscribe(
-       (token) => {
-         this.authService.saveToken(token.token);
+  if (this.loginForm.valid) {
+    const { username, password } = this.loginForm.value.credentials;
+    this.authService.login({ username, password }).subscribe(
+      (token) => {
+        this.authService.saveToken(token.token);
 
-         
-         this.router.navigate(['/admin']); 
-         console.log(username)
-       },
-       error => {
-         console.error('Login failed', error);
-       }
-     );
-   }
- }
+        const user = this.authService.getUserInfo();
+        if (user?.roles?.includes('ROLE_ADMIN')) {
+          this.router.navigate(['/admin']);
+        } else {
+          const redirectUrl = this.redirectService.getRedirectUrl();
+          if (redirectUrl) {
+            this.router.navigate([redirectUrl]);
+            this.redirectService.clearRedirectUrl();
+          } else {
+            this.router.navigate(['/mon-compte']);
+          }
+        }
+      },
+      error => {
+        console.error('Login failed', error);
+      }
+    );
+  }
+}
+
+
 }
 

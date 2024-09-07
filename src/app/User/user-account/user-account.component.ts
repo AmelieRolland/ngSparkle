@@ -5,7 +5,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-user-account',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, CommonModule],
+  imports: [CommonModule],
   templateUrl: './user-account.component.html',
   styleUrl: './user-account.component.css'
 })
