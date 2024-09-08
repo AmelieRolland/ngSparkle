@@ -20,6 +20,7 @@ import { ServiceFormComponent } from './admin/service-form/service-form.componen
 import { MessageComponent } from './admin/message/message.component';
 import { UserAccountComponent } from './User/user-account/user-account.component';
 import { PaymentComponent } from './payment/payment.component';
+import { OrderDetailComponent } from './admin/order-detail/order-detail.component';
 
 export const routes: Routes = [
     { path: '', component : AccueilComponent},
@@ -34,6 +35,7 @@ export const routes: Routes = [
     { path: 'mon-compte', component: UserAccountComponent, canActivate: [authGuard], data: { roles: 'ROLE_USER'}},
     { path: 'admin',component: AdminComponent, canActivate: [authGuard], data: { roles: 'ROLE_ADMIN'}, children: [
         { path: 'commandes', component: OrdersComponent},
+        { path: 'commandes/:id', component: OrderDetailComponent }, 
         { path: 'messages', component: MessagesComponent },
         { path: 'messages/:id', component: MessageComponent },
         { path: 'articles', component: ArticlesListComponent },

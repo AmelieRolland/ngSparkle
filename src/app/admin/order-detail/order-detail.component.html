@@ -1,0 +1,43 @@
+<div *ngIf="order">
+    <div class="container mt-5">
+      <div class="row mb-4">
+        <div class="col-12">
+          <h2 class="text-center">Détails de la commande #{{ order.id }}</h2>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-md-6">
+          <p><strong>Date de commande :</strong> {{ order.order_date | date:'longDate' }}</p>
+          <p><strong>Statut :</strong> {{ order.status }}</p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Option de livraison :</strong> {{ order.optionDelivery ? 'Oui' : 'Non' }}</p>
+          <p><strong>Utilisateur :</strong> {{ order.user }}</p>
+        </div>
+      </div>
+  
+      <h3 class="mt-4 mb-3">Items de la commande</h3>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Article</th>
+              <th>Matière</th>
+              <th>Service</th>
+              <th>Quantité</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of items">
+              <td>{{ item.articleName }}</td>
+              <td>{{ item.fabricName }}</td>
+              <td>{{ item.serviceName }}</td>
+              <td>{{ item.quantity }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

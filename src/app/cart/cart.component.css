@@ -1,6 +1,12 @@
 .quantity-selector .form-control {
     width: 60px;
   }
+  .supprimer {
+    color: #af7003;
+    border: none;
+    background-color: transparent;
+    transition: 0.5s all ease;
+  }
 
 
 

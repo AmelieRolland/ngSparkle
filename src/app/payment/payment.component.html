@@ -1,1 +1,60 @@
-<h1>Paiement</h1>
+<div class="container my-5">
+    <div class="row">
+      <!-- Coordonnées -->
+      <div class="col-md-6">
+        <h4>Coordonnées</h4>
+        <form>
+          <div class="mb-3">
+            <label for="address" class="form-label">Adresse</label>
+            <input type="text" class="form-control" id="address"  placeholder="Votre adresse">
+          </div>
+          <div class="mb-3">
+            <label for="phone" class="form-label">Téléphone</label>
+            <input type="text" class="form-control" id="phone"  placeholder="Votre numéro de téléphone">
+          </div>
+        </form>
+      </div>
+  
+      <!-- Paiement -->
+      <div class="col-md-6">
+        <h4>Paiement</h4>
+        <form>
+          <!-- Option de paiement -->
+          <div class="mb-3">
+            <label class="form-label">Mode de paiement</label>
+            <select class="form-select">
+              <option value="credit-card">Carte Bleue</option>
+              <option value="paypal">PayPal</option>
+            </select>
+          </div>
+  
+          <!-- Carte Bleue -->
+          <div >
+            <div class="mb-3">
+              <label for="cardNumber" class="form-label">Numéro de carte</label>
+              <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456">
+            </div>
+            <div class="mb-3">
+              <label for="cardExpiry" class="form-label">Date d'expiration</label>
+              <input type="text" class="form-control" id="cardExpiry" placeholder="MM/AA">
+            </div>
+            <div class="mb-3">
+              <label for="cardCvc" class="form-label">CVC</label>
+              <input type="text" class="form-control" id="cardCvc" placeholder="123">
+            </div>
+          </div>
+  
+          <!-- PayPal -->
+          <div >
+            <div class="alert alert-info" role="alert">
+              Vous serez redirigé vers PayPal pour compléter le paiement.
+            </div>
+          </div>
+  
+          <!-- Bouton de soumission -->
+          <button type="submit" class="btn btn-primary">Payer</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  

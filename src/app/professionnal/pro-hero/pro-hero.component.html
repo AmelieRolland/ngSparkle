@@ -19,22 +19,13 @@
         </div>
 
 
-        <div class="col-lg-4 d-flex flex-column justify-content-center">
-            <div class="bloc-droit">
-
-                <div>
-                    <h2 class="py-4">Vous êtes une Maison de haute couture, un hôtel ou une conciergerie haut de gamme?
-                    </h2>
-                    <p class="pb-5">Chez Sparkle, nous savons que l'excellence se reflète dans chaque détail.
-                        Découvrez nos services sur mesure pour les professionnels.</p>
-                    <div class="d-flex flex-row w-100">
-                        <div>
-                            <a [routerLink]="['/pro/services']" fragment="services" class="btn-vert" title="découvrez nos services"> Je découvre </a>
-                        </div>
-                        <div class="ps-5">
-                            <a [routerLink]="['/pro/devis']" fragment="devis" class="btn-vert-clair" title="demander un devis"> Je demande un devis </a>
-                        </div>
-                    </div>
+        <div class="col-lg-5 d-flex flex-column justify-content-center px-3">
+            <div class="bloc-droit text-center text-lg-start">
+                <h2 class="py-4">Vous êtes une Maison de haute couture, un hôtel ou une conciergerie haut de gamme ?</h2>
+                <p class="pb-5">Chez Sparkle, nous savons que l'excellence se reflète dans chaque détail. Découvrez nos services sur mesure pour les professionnels.</p>
+                <div class="d-flex flex-column flex-sm-row  w-100">
+                    <a [routerLink]="['/pro/services']" fragment="services" class="btn-vert mb-2 mb-sm-0 me-sm-3 text-center" title="découvrez nos services">Je découvre</a>
+                    <a [routerLink]="['/pro/devis']" fragment="devis" class="btn-vert-clair text-center" title="demander un devis">Je demande un devis</a>
                 </div>
             </div>
         </div>

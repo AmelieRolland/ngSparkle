@@ -75,6 +75,8 @@ export interface IUser{
     gender: Gender;
     registration_date: Date;
     roles: string[]; 
+    userIdentifier : string;
+    orders: string[];
 }
 export interface Employee extends IUser {
   }
@@ -105,6 +107,22 @@ export interface Employee extends IUser {
   export interface ICredentials {
     email: string;
     password: string;
+  }
+
+  export interface OrderWithDetails {
+    id: number;
+    price: number;
+    optionDelivery: boolean;
+    deliveryDate: string;
+    status: string;
+    user: string;
+    items: string[];
+    order_date: string;
+    delivery_slot: string;
+    drop_off_date: string;
+    userDetails: any;
+    statusDetails: any;
+    assignedEmployeeId?: string;
   }
   
   

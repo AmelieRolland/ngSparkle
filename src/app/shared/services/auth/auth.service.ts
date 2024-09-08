@@ -1,9 +1,12 @@
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { jwtDecode } from 'jwt-decode';
+import { IUser } from '../../entities/entities';
+import { map, catchError } from 'rxjs/operators';
+
 
 
 export interface IToken {
@@ -24,11 +27,12 @@ export class AuthService {
   }
 
   saveToken(token: string): void {
-    localStorage.setItem('token', token); // Utilise localStorage pour stocker le token
+    localStorage.setItem('token', token);
   }
 
   getToken(): string | null {
-    return localStorage.getItem('token'); // Récupère le token depuis localStorage
+    console.log(localStorage.getItem('token'));
+    return localStorage.getItem('token'); 
   }
 
   isLogged(): boolean {
@@ -55,4 +59,28 @@ export class AuthService {
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
   }
+
+  getUserIRI(): Observable<string> {
+    const token = this.getToken();
+    if (token) {
+      const decodedToken: any = jwtDecode(token);
+      console.log('Token décodé:', decodedToken);
+      const username = decodedToken.username; 
+      if (username) {
+        return this.http.get<IUser[]>(`${this.url}/users?username=${username}`).pipe(
+          map((users: IUser[]) => {
+            const user = users.find(u => u.userIdentifier === username);
+            if (user && user.id) {
+              return `/api/users/${user.id}`; 
+            }
+            throw new Error('Utilisateur non trouvé');
+          }),
+          catchError(err => throwError('Erreur lors de la récupération de l\'utilisateur'))
+        );
+      }
+    }
+    return throwError('Utilisateur non connecté ou token invalide.');
+  }
 }
+  
+

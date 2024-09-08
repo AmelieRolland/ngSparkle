@@ -7,3 +7,7 @@
     --bs-modal-height: 600px;
     
 }
+.modal-body {
+    max-height: calc(100vh - 200px); 
+    overflow-y: auto;
+  }

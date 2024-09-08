@@ -45,18 +45,15 @@ export class EmployesComponent {
 
   onSubmit() {
     if (this.employeeForm.valid) {
-      // Convert gender ID to IRI
       const genderId = this.employeeForm.get('gender')?.value;
       const genderIRI = `/api/genders/${genderId}`;
 
-      // Prepare user data with IRI for gender
       const userData = {
         ...this.employeeForm.value,
-        gender: genderIRI,  // Format the gender field as an IRI
-        roles: ['ROLE_EMPLOYEE']  // Automatically assign role 'ROLE_EMPLOYEE'
+        gender: genderIRI, 
+        roles: ['ROLE_EMPLOYEE'] 
       };
 
-      // Remove confirmPassword from data sent to backend
       delete userData.confirmPassword;
 
       this.userService.register(userData).subscribe({
