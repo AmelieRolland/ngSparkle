@@ -61,6 +61,7 @@ export interface Order {
   drop_off_date: string;
   order_date: string;
   items: string[];
+  employee?: string;
 }
 
 export interface IUser{
@@ -123,6 +124,8 @@ export interface Employee extends IUser {
     userDetails: any;
     statusDetails: any;
     assignedEmployeeId?: string;
+    employee?: string; 
+    assignedEmployee?: any;
   }
   
   

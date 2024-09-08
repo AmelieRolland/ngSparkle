@@ -11,44 +11,37 @@
   </thead>
   <tbody>
     <tr *ngFor="let order of orders">
-      <!-- Afficher l'utilisateur -->
       <td>
-        <img alt="Avatar" src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80"
-             class="avatar avatar-sm rounded-circle me-2">
         <a class="text-heading font-semibold" href="#">
-          {{ order.userDetails.email }} <!-- Afficher l'email de l'utilisateur -->
+          {{ order.userDetails.email }}
         </a>
       </td>
 
-      <!-- Afficher la date de commande -->
       <td>
         {{ order.order_date | date:'MMM d, yyyy' }}
       </td>
 
-      <!-- Afficher l'employé associé -->
       <td>
-        <select class="form-select" [(ngModel)]="order.assignedEmployeeId" (change)="updateOrderEmployee(order.id.toString(), order.assignedEmployeeId ?? '')">
+        <select class="form-select" [(ngModel)]="order.assignedEmployeeId" 
+                (change)="updateOrderEmployee(order.id.toString(), order.assignedEmployeeId)">
           <option *ngFor="let employee of employees" [value]="employee.id">
             {{ employee.name }}
           </option>
         </select>
+        <p *ngIf="order.assignedEmployee">Employé : {{ order.assignedEmployee.name }}</p>
       </td>
-
-
       <td>
         {{ order.deliveryDate | date:'MMM d, yyyy' }}
       </td>
-
-  
       <td>
-        <select class="form-select" [(ngModel)]="order.statusDetails['id']" (change)="updateOrderStatus(order.id.toString(), order.statusDetails['@id'])">
-          <option *ngFor="let status of statuses" [value]="status['id']">
-            {{ status.status_name }}
+        <select class="form-select" [(ngModel)]="order.statusDetails.id" 
+                (change)="updateOrderStatus(order.id.toString(), order.statusDetails.id)">
+          <option *ngFor="let status of statuses" [value]="status.id">
+            {{ status.statusName }}
           </option>
         </select>
       </td>
 
-   
       <td class="text-end">
         <a [routerLink]="['/commandes', order.id]" class="btn btn-sm btn-neutral">Voir</a> 
         <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">

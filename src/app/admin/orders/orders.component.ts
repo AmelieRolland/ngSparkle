@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../../shared/services/order.service';
-import { Order, OrderWithDetails } from '../../shared/entities/entities';
+import { IUser, Order, OrderWithDetails, Status } from '../../shared/entities/entities';
 import { CommonModule } from '@angular/common';
 import { of, forkJoin, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -16,8 +16,8 @@ import { RouterLink } from '@angular/router';
 })
 export class OrdersComponent implements OnInit {
   orders: OrderWithDetails[] = []; 
-  statuses: any[] = []; 
-  employees: any[] = []; 
+  statuses: Status[] = []; 
+  employees: IUser[] = []; 
 
   constructor(private orderService: OrderService) {}
 
@@ -49,10 +49,16 @@ export class OrdersComponent implements OnInit {
                 return of(null); 
               })
             ),
+            employee: order.employee ? this.orderService.getUserByIRI(order.employee).pipe(
+              catchError(error => {
+                console.error('Erreur lors de la récupération de l\'employé:', error);
+                return of(null);
+              })
+            ) : of(null),
             order: of(order)
           })
         );
-
+  
         forkJoin(requests).pipe(
           catchError(error => {
             console.error('Erreur lors du chargement des détails:', error);
@@ -63,14 +69,16 @@ export class OrdersComponent implements OnInit {
             this.orders = results.map(result => ({
               ...result.order,
               userDetails: result.user,
-              statusDetails: result.status
+              statusDetails: result.status,
+              assignedEmployee: result.employee,
+              assignedEmployeeId: result.employee ? result.employee.id : null 
             })) as OrderWithDetails[];
-            console.log('Commandes avec détails:', this.orders);
           }
         );
       }
     );
   }
+  
 
   loadStatuses(): void {
     this.orderService.getAllStatuses().subscribe(
@@ -87,7 +95,6 @@ export class OrdersComponent implements OnInit {
     this.orderService.getAllEmployees().subscribe(
       (employees) => {
         this.employees = employees;
-        console.log('Employés chargés:', this.employees);
       },
       (error) => {
         console.error('Erreur lors du chargement des employés:', error);
@@ -96,28 +103,20 @@ export class OrdersComponent implements OnInit {
   }
   
 
-  updateOrderStatus(orderId: string, newStatusURI: string): void {
-    this.orderService.updateOrderStatus(orderId, newStatusURI).subscribe(
-      () => {
-        console.log('Statut mis à jour');
-        this.loadOrders(); 
-      },
-      (error) => {
-        console.error('Erreur lors de la mise à jour du statut:', error);
-      }
-    );
+  
+  updateOrderEmployee(orderId: string, employeeId: string | undefined): void {
+    if (employeeId) {
+      this.orderService.updateOrderEmployee(orderId, employeeId).subscribe(() => {
+      });
+    } else {
+      console.error('Aucun employé sélectionné.');
+    }
   }
+  
 
-  updateOrderEmployee(orderId: string, employeeId: string): void {
-    this.orderService.updateOrderEmployee(orderId, employeeId).subscribe(
-      () => {
-        console.log('Employé assigné mis à jour');
-        this.loadOrders(); 
-      },
-      (error) => {
-        console.error('Erreur lors de la mise à jour de l\'employé:', error);
-      }
-    );
+  updateOrderStatus(orderId: string, statusId: string): void {
+    this.orderService.updateOrderStatus(orderId, statusId).subscribe(() => {
+    });
   }
 
   
