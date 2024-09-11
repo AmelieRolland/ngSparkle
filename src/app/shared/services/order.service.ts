@@ -86,15 +86,17 @@ export class OrderService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/merge-patch+json'
     });
-    return this.http.patch<any>(`${this.apiUrl}/${orderURI}`, { status: newStatusIRI }, { headers });
+    return this.http.patch<any>(`http://localhost:8000/${orderURI}`, { status: newStatusIRI }, { headers });
   }
 
-  updateOrderEmployee(orderId: string, employeeId: string): Observable<any> {
+  updateOrderEmployee(orderId: string, employeeUri: string): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/merge-patch+json'
     });
-    return this.http.patch<any>(`${this.apiUrl}/${orderId}`, { employee: `/api/users/${employeeId}` }, { headers });
+    const body = { employee: employeeUri }; 
+    return this.http.patch(`${this.apiUrl}/${orderId}`, body, { headers });
   }
+  
 
   getOrderById(orderId: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${orderId}`);
@@ -121,5 +123,8 @@ export class OrderService {
         );
       })
     );
+  }
+  getUserOrders(userId: string): Observable<any[]> {
+    return this.http.get<any[]>(`http://localhost:8000/api/?user=${userId}`);
   }
 }

@@ -105,13 +105,23 @@ export class OrdersComponent implements OnInit {
 
   
   updateOrderEmployee(orderId: string, employeeId: string | undefined): void {
+    console.log('employeeId:', employeeId);
     if (employeeId) {
-      this.orderService.updateOrderEmployee(orderId, employeeId).subscribe(() => {
+      const employeeUri = `/api/users/${employeeId}`; 
+      console.log('employeeUri:', employeeUri);
+      this.orderService.updateOrderEmployee(orderId, employeeUri).subscribe(() => {
+        console.log(`Employé ${employeeId} assigné à la commande ${orderId}`);
+        const order = this.orders.find(o => o.id === parseInt(orderId));
+        if (order) {
+          const selectedEmployee = this.employees.find(emp => emp.id === Number(employeeId));
+          order.assignedEmployee = selectedEmployee;
+        }
       });
     } else {
       console.error('Aucun employé sélectionné.');
     }
   }
+  
   
 
   updateOrderStatus(orderId: string, statusId: string): void {

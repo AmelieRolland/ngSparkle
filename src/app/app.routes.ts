@@ -18,7 +18,7 @@ import { OrdersComponent } from './admin/orders/orders.component';
 import { FabricFormComponent } from './admin/fabric-form/fabric-form.component';
 import { ServiceFormComponent } from './admin/service-form/service-form.component';
 import { MessageComponent } from './admin/message/message.component';
-import { UserAccountComponent } from './User/user-account/user-account.component';
+import { UserAccountComponent } from './user-account/user-account.component';
 import { PaymentComponent } from './payment/payment.component';
 import { OrderDetailComponent } from './admin/order-detail/order-detail.component';
 
@@ -32,7 +32,7 @@ export const routes: Routes = [
     { path: 'login/inscription', component : InscriptionComponent},
     { path: 'login', component : LoginComponent},
     { path: 'paiement', component: PaymentComponent, canActivate: [authGuard]},
-    { path: 'mon-compte', component: UserAccountComponent, canActivate: [authGuard], data: { roles: 'ROLE_USER'}},
+    { path: 'mon-compte', component: UserAccountComponent, canActivate: [authGuard]},
     { path: 'admin',component: AdminComponent, canActivate: [authGuard], data: { roles: 'ROLE_ADMIN'}, children: [
         { path: 'commandes', component: OrdersComponent},
         { path: 'commandes/:id', component: OrderDetailComponent }, 

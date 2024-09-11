@@ -30,6 +30,7 @@
         </select>
         <p *ngIf="order.assignedEmployee">Employé : {{ order.assignedEmployee.name }}</p>
       </td>
+      
       <td>
         {{ order.deliveryDate | date:'MMM d, yyyy' }}
       </td>
@@ -43,7 +44,7 @@
       </td>
 
       <td class="text-end">
-        <a [routerLink]="['/commandes', order.id]" class="btn btn-sm btn-neutral">Voir</a> 
+        <a [routerLink]="['/admin/commandes', order.id]" class="btn btn-sm btn-neutral">Voir</a> 
         <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
           <i class="bi bi-trash"></i>
         </button>
