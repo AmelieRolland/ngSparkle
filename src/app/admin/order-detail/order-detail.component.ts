@@ -31,6 +31,13 @@ export class OrderDetailComponent implements OnInit {
   loadOrder(orderId: string): void {
     this.orderService.getOrderById(orderId).subscribe(order => {
       this.order = order;  
+      if (order.employee) {
+        this.orderService.getUserByIRI(order.employee).subscribe(employee => {
+          this.order.assignedEmployee = employee;
+        });
+      } else {
+        this.order.assignedEmployee = null;
+      }
       this.loadItems(order.items); 
     });
   }
