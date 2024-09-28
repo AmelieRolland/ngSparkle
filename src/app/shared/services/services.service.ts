@@ -2,14 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Service } from '../entities/entities';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServicesService {
 
-  private apiUrl = 'http://127.0.0.1:8000/api/services';
-
+private apiUrl = environment.apiUrl + '/services';
   constructor(private http: HttpClient) { }
 
   getServices(): Observable<Service[]> {

@@ -57,7 +57,7 @@ export class ArticlesComponent implements OnInit, OnDestroy {
   
 
   fetchArticles(): void {
-    this.dataArticles = this.articlesService.getAll().subscribe((data) => {
+   this.articlesService.getAll().subscribe((data) => {
       this.articles = data;
     });
   }
@@ -152,12 +152,11 @@ export class ArticlesComponent implements OnInit, OnDestroy {
     
         this.saveCartToSession(); 
         this.closeModal();
-        this.router.navigate(['/panier']);
+        this.router.navigate(['/articles']);
     } else {
         console.error('Veuillez sélectionner un article, une matière, un ou plusieurs services, et spécifier une quantité.');
     }
 }
-
 
 
 
