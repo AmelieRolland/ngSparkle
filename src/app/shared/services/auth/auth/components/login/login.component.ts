@@ -39,7 +39,8 @@ export class LoginComponent implements OnInit {
           this.authService.saveToken(token.token);
 
           const user = this.authService.getUserInfo();
-          if (user?.roles?.includes('ROLE_ADMIN')) {
+          console.log('User:', user.roles);
+          if (user?.roles?.includes('ROLE_ADMIN') || user?.roles?.includes('ROLE_EMPLOYEE')) {
             this.router.navigate(['/admin']);
           } else {
             const redirectUrl = this.redirectService.getRedirectUrl();

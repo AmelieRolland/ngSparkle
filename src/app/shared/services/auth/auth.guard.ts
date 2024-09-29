@@ -17,12 +17,13 @@ export class authGuard implements CanActivate {
       return false;
     }
 
-    const expectedRole = route.data['roles'];
-    if (expectedRole && !user.roles.includes(expectedRole)) {
+    const expectedRoles = route.data['roles'] as Array<string>; 
+
+    if (expectedRoles && !expectedRoles.some(role => user.roles.includes(role))) {
       this.router.navigate(['/']);
       return false;
     }
 
-    return true;
+    return true; 
   }
 }

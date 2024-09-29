@@ -126,6 +126,7 @@ export interface Employee extends IUser {
     assignedEmployeeId?: string;
     employee?: string; 
     assignedEmployee?: any;
+    assignedEmployeeName?: string;
   }
   
   

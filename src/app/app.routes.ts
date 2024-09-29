@@ -21,33 +21,41 @@ import { MessageComponent } from './admin/message/message.component';
 import { UserAccountComponent } from './user-account/user-account.component';
 import { PaymentComponent } from './payment/payment.component';
 import { OrderDetailComponent } from './admin/order-detail/order-detail.component';
+import { OrderEditComponent } from './admin/order-edit/order-edit.component';
 
 export const routes: Routes = [
-    { path: '', component : AccueilComponent},
-    { path: 'pro', component : ProComponent},
-    { path: 'pro/services', component : ServicesComponent},
-    { path: 'pro/devis', component : DevisComponent},
-    { path: 'panier', component : CartComponent},
-    { path: 'articles', component : ArticlesComponent},
-    { path: 'login/inscription', component : InscriptionComponent},
-    { path: 'login', component : LoginComponent},
-    { path: 'paiement', component: PaymentComponent, canActivate: [authGuard]},
-    { path: 'mon-compte', component: UserAccountComponent, canActivate: [authGuard]},
-    { path: 'admin',component: AdminComponent, canActivate: [authGuard], data: { roles: 'ROLE_ADMIN'}, children: [
-        { path: 'commandes', component: OrdersComponent},
-        { path: 'commandes/:id', component: OrderDetailComponent }, 
-        { path: 'messages', component: MessagesComponent },
-        { path: 'messages/:id', component: MessageComponent },
-        { path: 'articles', component: ArticlesListComponent },
-        { path: 'articles/new', component: ArticleFormComponent },
-        { path: 'articles/modifier/:id', component: ArticleFormComponent },
-        { path: 'fabrics/new', component: FabricFormComponent },
-        { path: 'fabrics/modifier/:id', component: FabricFormComponent },
-        { path: 'service/new', component: ServiceFormComponent },
-        { path: 'service/modifier/:id', component: ServiceFormComponent },
-        { path: 'employes', component: EmployesComponent },
+  { path: '', component: AccueilComponent },
+  { path: 'pro', component: ProComponent },
+  { path: 'pro/services', component: ServicesComponent },
+  { path: 'pro/devis', component: DevisComponent },
+  { path: 'panier', component: CartComponent },
+  { path: 'articles', component: ArticlesComponent },
+  { path: 'login/inscription', component: InscriptionComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'paiement', component: PaymentComponent, canActivate: [authGuard] },
+  { path: 'mon-compte', component: UserAccountComponent, canActivate: [authGuard] },
+  { 
+    path: 'admin', 
+    component: AdminComponent, 
+    canActivate: [authGuard], 
+    data: { roles: ['ROLE_ADMIN', 'ROLE_EMPLOYEE'] }, 
+    children: [
+        { path: 'commandes', component: OrdersComponent, canActivate: [authGuard], data: { roles: ['ROLE_ADMIN', 'ROLE_EMPLOYEE'] }},
+        { path: 'commandes/:id', component: OrderDetailComponent, canActivate: [authGuard], data: { roles: ['ROLE_ADMIN', 'ROLE_EMPLOYEE'] }},
+        { path: 'commandes/edit/:id', component: OrderEditComponent, canActivate: [authGuard], data: { roles: ['ROLE_ADMIN'] }},
+        { path: 'messages', component: MessagesComponent, canActivate: [authGuard], data: { roles: ['ROLE_ADMIN', 'ROLE_EMPLOYEE'] }},
+        { path: 'messages/:id', component: MessageComponent, canActivate: [authGuard], data: { roles: ['ROLE_ADMIN', 'ROLE_EMPLOYEE'] }},
+        { path: 'articles', component: ArticlesListComponent, canActivate: [authGuard], data: { roles: ['ROLE_ADMIN'] }},
+        { path: 'articles/new', component: ArticleFormComponent, canActivate: [authGuard], data: { roles: ['ROLE_ADMIN'] }},
+        { path: 'articles/modifier/:id', component: ArticleFormComponent, canActivate: [authGuard], data: { roles: ['ROLE_ADMIN'] }},
+        { path: 'fabrics/new', component: FabricFormComponent, canActivate: [authGuard], data: { roles: ['ROLE_ADMIN'] }},
+        { path: 'fabrics/modifier/:id', component: FabricFormComponent, canActivate: [authGuard], data: { roles: ['ROLE_ADMIN'] }},
+        { path: 'service/new', component: ServiceFormComponent, canActivate: [authGuard], data: { roles: ['ROLE_ADMIN'] }},
+        { path: 'service/modifier/:id', component: ServiceFormComponent, canActivate: [authGuard], data: { roles: ['ROLE_ADMIN'] }},
+        { path: 'employes', component: EmployesComponent, canActivate: [authGuard], data: { roles: ['ROLE_ADMIN', 'ROLE_EMPLOYEE'] }},
         { path: '', redirectTo: 'commandes', pathMatch: 'full' },
-      ]},
-    { path: '**', component : Error404Component}
-
+    ]
+  },
+  { path: '**', component: Error404Component }
 ];
+

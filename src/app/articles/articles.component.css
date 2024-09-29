@@ -11,3 +11,20 @@
     max-height: calc(100vh - 200px); 
     overflow-y: auto;
   }
+
+  .custom-modal {
+    background-color: white; 
+    border: #394B41 solid 5px;
+    border-radius: 0;
+    width: 400px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Courier New', Courier, monospace;
+  }
+
+  
+  
+  

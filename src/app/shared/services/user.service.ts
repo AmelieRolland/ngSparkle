@@ -12,6 +12,10 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
+  getAllUsers(): Observable<IUser[]> {
+    return this.http.get<IUser[]>(this.url + '/users');
+  }
+
   getUserWithOrders(userId: number): Observable<any> {
     return this.http.get<any>(`${this.url}/users/${userId}`);
   }

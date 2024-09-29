@@ -14,7 +14,7 @@ import { CategoryFilterPipe } from '../category-filter.pipe';
 @Component({
   selector: 'app-articles',
   standalone: true,
-  imports: [NgFor, FormsModule, NgIf, RouterModule, CategoryFilterPipe, CommonModule], // Ajoutez le pipe ici
+  imports: [NgFor, FormsModule, NgIf, RouterModule, CategoryFilterPipe, CommonModule],
   templateUrl: './articles.component.html',
   styleUrls: ['./articles.component.css']
 })
@@ -33,6 +33,8 @@ export class ArticlesComponent implements OnInit, OnDestroy {
   count: number = 0;
   panier: Item[] = [];
   selectedCategory: number | null = null;
+
+  showAlert = false;
 
   @ViewChild('inputQt', { static: true }) inputQt!: ElementRef;
   @Output() close = new EventEmitter<void>();
@@ -152,6 +154,12 @@ export class ArticlesComponent implements OnInit, OnDestroy {
     
         this.saveCartToSession(); 
         this.closeModal();
+
+        this.showAlert = true;
+        setTimeout(() => {
+          this.showAlert = false;
+        }, 3000);
+        
         this.router.navigate(['/articles']);
     } else {
         console.error('Veuillez sélectionner un article, une matière, un ou plusieurs services, et spécifier une quantité.');

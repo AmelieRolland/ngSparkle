@@ -127,4 +127,8 @@ export class OrderService {
   getUserOrders(userId: string): Observable<any[]> {
     return this.http.get<any[]>(`http://localhost:8000/api/?user=${userId}`);
   }
+
+  deleteOrder(orderId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${orderId}`);
+  }
 }

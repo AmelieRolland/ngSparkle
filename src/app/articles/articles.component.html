@@ -6,6 +6,21 @@
   </li>
 </ul>
 
+<div *ngIf="showAlert" class="modal d-block d-flex justify-content-center align-items-center text-center" tabindex="-1" role="dialog" aria-labelledby="alertModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content custom-modal">
+      <div class="modal-body">
+        Votre article a bien été ajouté au panier
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="showAlert = false">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 <section>
   <div class="container fond-clair">
     <div class="row d-flex flex-wrap justify-content-center">
@@ -23,8 +38,6 @@
     </div>
   </div>
 </section>
-
-
 
 
 <!-- modal -->

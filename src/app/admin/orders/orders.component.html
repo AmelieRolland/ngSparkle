@@ -1,3 +1,9 @@
+<div *ngIf="orders().length === 0" class="d-flex justify-content-center mt-5">
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Chargement...</span>
+  </div>
+</div>
+
 <table class="table">
   <thead>
     <tr>
@@ -10,10 +16,10 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let order of orders">
+    <tr *ngFor="let order of orders()">
       <td>
         <a class="text-heading font-semibold" href="#">
-          {{ order.userDetails.email }}
+          {{ order.userDetails?.email }}
         </a>
       </td>
 
@@ -22,32 +28,28 @@
       </td>
 
       <td>
-        <select class="form-select" [(ngModel)]="order.assignedEmployeeId" 
-                (change)="updateOrderEmployee(order.id.toString(), order.assignedEmployeeId)">
-          <option *ngFor="let employee of employees" [value]="employee.id">
-            {{ employee.name }}
-          </option>
-        </select>
-        <p *ngIf="order.assignedEmployee">Employé : {{ order.assignedEmployee.name }}</p>
+        <p>{{ order.assignedEmployeeName }}</p>
       </td>
-      
+
       <td>
         {{ order.deliveryDate | date:'MMM d, yyyy' }}
       </td>
+
       <td>
-        <select class="form-select" [(ngModel)]="order.statusDetails.id" 
-                (change)="updateOrderStatus(order.id.toString(), order.statusDetails.id)">
-          <option *ngFor="let status of statuses" [value]="status.id">
-            {{ status.statusName }}
-          </option>
-        </select>
+        <p>{{ order.statusDetails?.statusName }}</p>
       </td>
 
       <td class="text-end">
-        <a [routerLink]="['/admin/commandes', order.id]" class="btn btn-sm btn-neutral">Voir</a> 
-        <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-          <i class="bi bi-trash"></i>
-        </button>
+        <button class="btn btn-sm btn-neutral" 
+                (click)="modifyOrder(order.id.toString())" 
+                [disabled]="userHasRole('ROLE_EMPLOYEE')">Modifier</button>
+
+        <a [routerLink]="['/admin/commandes', order.id]" class="btn btn-sm btn-neutral">Voir</a>
+
+        <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover"
+        (click)="deleteOrder(order.id)">
+  <i class="bi bi-trash"></i>
+</button>
       </td>
     </tr>
   </tbody>
