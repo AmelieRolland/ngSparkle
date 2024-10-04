@@ -22,30 +22,38 @@
               <p id="alertText"></p>
             </div>
   
-            <form id="form" (ngSubmit)="sendMessage()">
+            <form id="form" (ngSubmit)="sendMessage()" #contactForm="ngForm">
               <div class="mb-5">
                 <label for="name" class="form-label d-none">Votre nom</label>
-                <input type="text" class="form-control" id="form-name" [(ngModel)]="newMessage.senderName" name="senderName" placeholder="Mon nom">
+                <input type="text" class="form-control" id="form-name" [(ngModel)]="newMessage.senderName" name="senderName" placeholder="Mon nom" required>
               </div>
-  
+            
               <div class="mb-5">
                 <label for="firstname" class="form-label d-none">Votre prénom</label>
-                <input type="text" class="form-control" id="form-firstname" [(ngModel)]="newMessage.senderFirstName" name="senderFirstName" placeholder="Mon prénom">
+                <input type="text" class="form-control" id="form-firstname" [(ngModel)]="newMessage.senderFirstName" name="senderFirstName" placeholder="Mon prénom" required>
               </div>
-  
+            
               <div class="mb-5">
                 <label for="email" class="form-label d-none">Email address</label>
-                <input type="email" class="form-control" id="form-email" [(ngModel)]="newMessage.senderEmail" name="senderEmail" placeholder="Mon e-mail">
+                <input type="email" class="form-control" id="form-email" [(ngModel)]="newMessage.senderEmail" name="senderEmail" placeholder="Mon e-mail" required email>
+                <!-- Message d'erreur pour l'email invalide -->
+                <div *ngIf="contactForm.controls['senderEmail']?.invalid && contactForm.controls['senderEmail']?.touched" class="text-danger">
+                  Veuillez entrer une adresse email valide.
+                </div>
               </div>
-  
+            
               <div class="mb-5">
                 <label for="txt-area" class="form-label d-none">Message</label>
-                <textarea class="form-control" id="form-message" [(ngModel)]="newMessage.content" name="content" placeholder="Mon message"
-                  rows="5"></textarea>
+                <textarea class="form-control" id="form-message" [(ngModel)]="newMessage.content" name="content" placeholder="Mon message" rows="5" required></textarea>
               </div>
-  
-              <button type="submit" class="btn btn-primary px-5 py-2">Envoyer</button>
+            
+              <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+                {{ errorMessage }}
+              </div>
+            
+              <button type="submit" class="btn btn-primary px-5 py-2" [disabled]="!contactForm.valid">Envoyer</button>
             </form>
+            
           </div>
         </div>
   

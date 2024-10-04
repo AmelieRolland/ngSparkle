@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { UserService } from '../../shared/services/user.service';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+
 import { CommonModule } from '@angular/common';
 import { Gender } from '../../shared/entities/entities';
 import { GenderService } from '../../shared/services/gender.service';
@@ -18,27 +19,36 @@ export class InscriptionComponent {
 
   constructor(private router: Router, private authService: AuthService) { }
 
-
   genders: Gender[] = [];
+  errorMessage: string = '';
 
   service = inject(UserService);
   genderService = inject(GenderService);
 
-  public loginForm:FormGroup = new FormGroup ({
-    gender: new FormControl,
-    name: new FormControl,
-    surname: new FormControl,
-    email: new FormControl('', [Validators.required, Validators.email]),
+  public loginForm: FormGroup = new FormGroup({
+    gender: new FormControl('', Validators.required),
+    name: new FormControl('', Validators.required),
+    surname: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email, this.emailDomainValidator]),
     password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(20)]),
     confirmPassword: new FormControl('', Validators.required),
-    phone: new FormControl('', [Validators.minLength(8), Validators.maxLength(20)]),
-    birthday: new FormControl('', [Validators.required]),
-    direction: new FormControl,
-    registration_date: new FormControl
-
-
-    
+    phone: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(20)]),
+    birthday: new FormControl('', Validators.required),
+    direction: new FormControl('', Validators.required),
+    registration_date: new FormControl('')
   })
+
+  emailDomainValidator(control: AbstractControl): ValidationErrors | null {
+    const email = control.value;
+    const validDomains = ['gmail.com', 'yahoo.com', 'outlook.com', 'mail.com'];
+    if (email) {
+      const domain = email.split('@')[1];
+      if (domain && !validDomains.includes(domain)) {
+        return { invalidDomain: true };
+      }
+    }
+    return null;
+  }
 
   ngOnInit() {
     this.genderService.getGenders().subscribe({

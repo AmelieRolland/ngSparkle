@@ -48,6 +48,12 @@ export class ArticlesComponent implements OnInit, OnDestroy {
     private router: Router
   ) {}
 
+  errorMessages = {
+    fabric: '',
+    services: '',
+    quantity: ''
+  };
+
   ngOnInit(): void {
     this.titleService.setTitle('Mes articles');
     this.fetchArticles();
@@ -55,6 +61,9 @@ export class ArticlesComponent implements OnInit, OnDestroy {
     this.fetchFabrics();
     this.fetchServices();
     this.loadCartFromSession();
+    if (this.fabrics.length > 0) {
+      this.fabricSelected = this.fabrics[0];
+    }
   }
   
 
@@ -128,38 +137,61 @@ export class ArticlesComponent implements OnInit, OnDestroy {
   }
 
   addToCart(): void {
-    console.log('Article sélectionné:', this.articleSelected);
-    console.log('Tissu sélectionné:', this.fabricSelected);
-    console.log('Services sélectionnés:', this.selectedServices);
-    console.log('Quantité:', this.count);
+    let valid = true;
 
-    if (this.articleSelected && this.fabricSelected && this.selectedServices.length > 0 && this.count > 0) {
+    this.errorMessages = {
+      fabric: '',
+      services: '',
+      quantity: ''
+    };
+
+    if (!this.fabricSelected) {
+        this.errorMessages.fabric = 'Veuillez sélectionner une matière.';
+        valid = false;
+    }
+
+    if (this.selectedServices.length === 0) {
+        this.errorMessages.services = 'Veuillez sélectionner au moins un service.';
+        valid = false;
+    }
+
+    if (this.count <= 0) {
+        this.errorMessages.quantity = 'Veuillez sélectionner une quantité valide.';
+        valid = false;
+    }
+
+    if (valid) {
+        console.log('Article sélectionné:', this.articleSelected);
+        console.log('Tissu sélectionné:', this.fabricSelected);
+        console.log('Services sélectionnés:', this.selectedServices);
+        console.log('Quantité:', this.count);
+
         const pricePerUnit = this.calculateTotalPrice();
-        
+
         const item: CartItem = {
-            id: this.panier.length + 1, 
+            id: this.panier.length + 1,
             quantity: this.count,
             price: pricePerUnit / this.count,
             subTotal: pricePerUnit,
-            articleName: this.articleSelected.articleName,
-            fabricName: this.fabricSelected.fabricName,
+            articleName: this.articleSelected!.articleName,
+            fabricName: this.fabricSelected!.fabricName,
             serviceName: this.selectedServices[0].serviceName,
-            article_id: this.articleSelected.id,
-            fabric_id: this.fabricSelected.id,
+            article_id: this.articleSelected!.id,
+            fabric_id: this.fabricSelected!.id,
             service_id: this.selectedServices[0].id
         };
-        
+
         this.panier.push(item);
         console.log('Item ajouté au panier:', item);
-    
-        this.saveCartToSession(); 
+
+        this.saveCartToSession();
         this.closeModal();
 
         this.showAlert = true;
         setTimeout(() => {
           this.showAlert = false;
         }, 3000);
-        
+
         this.router.navigate(['/articles']);
     } else {
         console.error('Veuillez sélectionner un article, une matière, un ou plusieurs services, et spécifier une quantité.');

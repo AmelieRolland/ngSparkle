@@ -10,20 +10,34 @@
 .modal-body {
     max-height: calc(100vh - 200px); 
     overflow-y: auto;
-  }
+}
 
-  .custom-modal {
-    background-color: white; 
-    border: #394B41 solid 5px;
-    border-radius: 0;
-    width: 400px;
-    height: 200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Courier New', Courier, monospace;
-  }
+.custom-modal {
+  background-color: white; 
+  border: #394B41 solid 5px;
+  border-radius: 0;
+  width: 400px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Courier New', Courier, monospace;
+}
+  
+.btn-outline-primary {
+  --bs-btn-color: #394B41;
+  --bs-btn-border-color: #394B41;
+  --bs-btn-hover-bg: #394B41;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-active-bg: #394B41;
+  --bs-btn-active-border-color: #394B41;
+}
+
+.btn-outline-primary:hover {
+  --bs-btn-bg: #394B41;
+  --bs-btn-color: #fff;
+}
 
   
   

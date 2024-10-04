@@ -1,81 +1,112 @@
 <section class="fond-vert container-fluid">
     <div class="container">
-
-
         <div class="col-lg-9 mx-auto row fond-clair border p-5 pt-lg-5">
-
             <div class="col-lg-5">
                 <h1 class="pt-0">Bienvenue chez Sparkle.</h1>
-                <!-- <p> Heureux de vous revoir !</p> -->
             </div>
 
             <div class="col-lg-6">
+                <!-- Flash message global d'erreur -->
+                <div *ngIf="errorMessage" class="alert alert-danger">
+                    {{ errorMessage }}
+                </div>
 
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                    <!-- Gender -->
                     <div class="mb-3">
                         <label for="validationCustom04" class="form-label">Civilité</label>
                         <select class="form-select focus-ring" id="validationCustom04" formControlName="gender" required>
                             <option value="">Choisir...</option>
                             <option *ngFor="let gender of genders" value="/api/genders/{{ gender.id }}">{{ gender.genderName }}</option>
                         </select>
+                        <div *ngIf="loginForm.get('gender')?.invalid && loginForm.get('gender')?.touched" class="text-danger">
+                            La civilité est obligatoire.
+                        </div>
                     </div>
+
+                    <!-- Name -->
                     <div class="mb-3">
                         <label for="validationCustom01" class="form-label">Prénom</label>
                         <input formControlName="name" type="text" class="form-control focus-ring" id="name" required>
+                        <div *ngIf="loginForm.get('name')?.invalid && loginForm.get('name')?.touched" class="text-danger">
+                            Le prénom est obligatoire.
+                        </div>
                     </div>
 
+                    <!-- Surname -->
                     <div class="mb-3">
                         <label for="validationCustom02" class="form-label">Nom</label>
-                        <input formControlName="surname" type="text" class="form-control focus-ring" id="surname"
-                            required>
+                        <input formControlName="surname" type="text" class="form-control focus-ring" id="surname" required>
+                        <div *ngIf="loginForm.get('surname')?.invalid && loginForm.get('surname')?.touched" class="text-danger">
+                            Le nom est obligatoire.
+                        </div>
                     </div>
 
-
+                    <!-- Email -->
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Votre email :</label>
-                        <input formControlName="email" type="email" class="form-control focus-ring" id="email"
-                            aria-describedby="emailHelp">
-                        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
-                            Email invalide
+                        <input formControlName="email" type="email" class="form-control focus-ring" id="email" aria-describedby="emailHelp">
+                        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-danger">
+                            Email invalide ou requis.
+                        </div>
+                        <div *ngIf="loginForm.get('email')?.hasError('invalidDomain') && loginForm.get('email')?.touched" class="text-danger">
+                            Le domaine de l'email n'est pas valide.
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <!-- Direction (Adresse) -->
+                    <div class="mb-3">
                         <label for="validationCustom03" class="form-label">Adresse</label>
-                        <input formControlName="direction" type="text" class="form-control focus-ring" id="direction"
-                            required>
+                        <input formControlName="direction" type="text" class="form-control focus-ring" id="direction" required>
+                        <div *ngIf="loginForm.get('direction')?.invalid && loginForm.get('direction')?.touched" class="text-danger">
+                            L'adresse est obligatoire.
+                        </div>
                     </div>
-                    <div class="col-md-6">
+
+                    <!-- Phone -->
+                    <div class="mb-3">
                         <label for="validationCustom03" class="form-label">Téléphone</label>
-                        <input formControlName="phone" type="text" class="form-control focus-ring" id="phone">
-                            
+                        <input formControlName="phone" type="text" class="form-control focus-ring" id="phone" required>
+                        <div *ngIf="loginForm.get('phone')?.invalid && loginForm.get('phone')?.touched" class="text-danger">
+                            Le téléphone doit comporter entre 8 et 20 caractères.
+                        </div>
                     </div>
-                    <div class="col-md-6">
+
+                    <!-- Birthday -->
+                    <div class="mb-3">
                         <label for="validationCustom03" class="form-label">Date de naissance</label>
-                        <input formControlName="birthday" type="date" class="form-control focus-ring" id="birthday">                            
+                        <input formControlName="birthday" type="date" class="form-control focus-ring" id="birthday" required>
+                        <div *ngIf="loginForm.get('birthday')?.invalid && loginForm.get('birthday')?.touched" class="text-danger">
+                            La date de naissance est obligatoire.
+                        </div>
                     </div>
+
+                    <!-- Password -->
                     <div class="mb-3">
                         <label for="inputPassword6" class="col-form-label">Mot de passe :</label>
-                        <input formControlName="password" type="password" id="password" class="form-control focus-ring"
-                            aria-describedby="passwordHelpInline">
-                        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-                            Mot de passe requis
+                        <input formControlName="password" type="password" id="password" class="form-control focus-ring" aria-describedby="passwordHelpInline">
+                        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger">
+                            Le mot de passe est requis et doit comporter entre 8 et 20 caractères.
                         </div>
                         <span id="passwordHelpInline" class="form-text">
-                            Must be 8-20 characters long.
+                            Doit comporter entre 8 et 20 caractères.
                         </span>
-
                     </div>
+
+                    <!-- Confirm Password -->
                     <div class="mb-3">
                         <label for="inputPassword6" class="col-form-label">Répétez votre mot de passe :</label>
-                        <input formControlName="confirmPassword" type="password" id="password" class="form-control focus-ring"
-                            aria-describedby="passwordHelpInline">
+                        <input formControlName="confirmPassword" type="password" id="confirmPassword" class="form-control focus-ring" aria-describedby="passwordHelpInline">
+                        <div *ngIf="loginForm.get('confirmPassword')?.invalid && loginForm.get('confirmPassword')?.touched" class="text-danger">
+                            La confirmation du mot de passe est requise.
+                        </div>
+                        <div *ngIf="loginForm.get('password')?.value !== loginForm.get('confirmPassword')?.value && loginForm.get('confirmPassword')?.touched" class="text-danger">
+                            Les mots de passe ne correspondent pas.
+                        </div>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Connexion</button>
                 </form>
-                <div class="fs-6 fw-light pt-5">
-                </div>
             </div>
         </div>
     </div>
