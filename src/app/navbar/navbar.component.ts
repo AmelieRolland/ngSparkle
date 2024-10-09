@@ -41,6 +41,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('panier');
     this.router.navigate(['/']);
   }
 

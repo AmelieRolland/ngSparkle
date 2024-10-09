@@ -1,0 +1,14 @@
+.btn-disabled {
+    background-color: #abf989; 
+    color: #000; 
+    border: 1px solid transparent; 
+    cursor: not-allowed; 
+}
+
+.btn:disabled {
+    background-color: #396825;
+    color: #000;
+    border: 1px solid transparent; 
+    opacity: 0.65;
+    pointer-events: none;
+}

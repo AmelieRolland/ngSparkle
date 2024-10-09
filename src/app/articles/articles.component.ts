@@ -82,8 +82,13 @@ export class ArticlesComponent implements OnInit, OnDestroy {
   fetchFabrics(): void {
     this.dataFabrics = this.fabricService.getFabrics().subscribe((fabricData) => {
       this.fabrics = fabricData;
+  
+      if (this.fabrics.length > 0) {
+        this.fabricSelected = this.fabrics[0];
+      }
     });
   }
+  
 
   fetchServices(): void {
     this.dataServices = this.servicesService.getServices().subscribe((serviceData) => {
@@ -168,21 +173,23 @@ export class ArticlesComponent implements OnInit, OnDestroy {
 
         const pricePerUnit = this.calculateTotalPrice();
 
-        const item: CartItem = {
-            id: this.panier.length + 1,
-            quantity: this.count,
-            price: pricePerUnit / this.count,
-            subTotal: pricePerUnit,
-            articleName: this.articleSelected!.articleName,
-            fabricName: this.fabricSelected!.fabricName,
-            serviceName: this.selectedServices[0].serviceName,
-            article_id: this.articleSelected!.id,
-            fabric_id: this.fabricSelected!.id,
-            service_id: this.selectedServices[0].id
-        };
+        this.selectedServices.forEach(service => {
+          const item: CartItem = {
+              id: this.panier.length + 1, 
+              quantity: this.count,
+              price: pricePerUnit / this.count,
+              subTotal: pricePerUnit,
+              articleName: this.articleSelected!.articleName,
+              fabricName: this.fabricSelected!.fabricName,
+              serviceName: service.serviceName,
+              article_id: this.articleSelected!.id,
+              fabric_id: this.fabricSelected!.id,
+              service_id: service.id
+          };
 
-        this.panier.push(item);
-        console.log('Item ajouté au panier:', item);
+          this.panier.push(item);
+          console.log('Item ajouté au panier:', item);
+      });
 
         this.saveCartToSession();
         this.closeModal();
@@ -201,12 +208,12 @@ export class ArticlesComponent implements OnInit, OnDestroy {
 
 
   private saveCartToSession(): void {
-    sessionStorage.setItem('panier', JSON.stringify(this.panier));
+    localStorage.setItem('panier', JSON.stringify(this.panier));
     console.log('Panier sauvegardé dans la session:', this.panier);
   }
 
   private loadCartFromSession(): void {
-    const savedCart = sessionStorage.getItem('panier');
+    const savedCart = localStorage.getItem('panier');
     if (savedCart) {
       this.panier = JSON.parse(savedCart);
       console.log('Panier chargé de la session:', this.panier);

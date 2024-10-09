@@ -56,6 +56,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('token');
+    localStorage.removeItem('panier');
     this.router.navigate(['/login']);
   }
 

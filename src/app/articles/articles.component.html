@@ -57,7 +57,10 @@
           <div>
             <p><strong>Je sélectionne la matière :</strong></p>
             <select class="form-select" [(ngModel)]="fabricSelected" aria-label="Default select example">
+              <option [ngValue]="null">-- Choisir une matière --</option>
+
               <option *ngFor="let fabric of fabrics" [ngValue]="fabric">{{ fabric.fabricName }}</option>
+              
             </select>
             <p class="text-danger" *ngIf="errorMessages.fabric">{{ errorMessages.fabric }}</p>
           </div>

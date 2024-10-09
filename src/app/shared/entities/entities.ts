@@ -128,5 +128,9 @@ export interface Employee extends IUser {
     assignedEmployee?: any;
     assignedEmployeeName?: string;
   }
+
+  export interface CreatedOrderResponse {
+    id: number;
+  }
   
   

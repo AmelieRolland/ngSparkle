@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Article, CartItem, Fabric, Item, Order, Service } from '../shared/entities/entities';
+import { Article, CartItem, CreatedOrderResponse, Fabric, Item, Order, Service } from '../shared/entities/entities';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { OrderService } from '../shared/services/order.service';
@@ -26,11 +26,11 @@ export class CartComponent implements OnInit {
       deliverySlot: this.deliverySlot,
       dropOffDate: this.dropOffDate,
     };
-    sessionStorage.setItem('deliveryInfo', JSON.stringify(deliveryInfo));
+    localStorage.setItem('deliveryInfo', JSON.stringify(deliveryInfo));
   }
 
   loadDatesFromSession(): void {
-    const savedDeliveryInfo = sessionStorage.getItem('deliveryInfo');
+    const savedDeliveryInfo = localStorage.getItem('deliveryInfo');
     if (savedDeliveryInfo) {
       const parsedInfo = JSON.parse(savedDeliveryInfo);
       this.deliveryDate = parsedInfo.deliveryDate || '';
@@ -46,7 +46,7 @@ export class CartComponent implements OnInit {
   }
 
   loadCartFromSession(): void {
-    const savedCart = sessionStorage.getItem('panier');
+    const savedCart = localStorage.getItem('panier');
     if (savedCart) {
         const parsedCart = JSON.parse(savedCart);
         this.cart = parsedCart.map((item: any) => ({
@@ -95,7 +95,7 @@ export class CartComponent implements OnInit {
   }
 
   private saveCartToSession(): void {
-    sessionStorage.setItem('panier', JSON.stringify(this.cart))
+    localStorage.setItem('panier', JSON.stringify(this.cart))
     console.log('Panier sauvegardé dans la session:', this.cart)
   }
   calculateTotalPrice(): number {
@@ -127,11 +127,11 @@ export class CartComponent implements OnInit {
           const order: Order = {
             price: this.calculateTotalPrice(),
             optionDelivery: true,
-            deliveryDate: this.deliveryDate || "",
-            status: '/api/statuses/17',
+            deliveryDate: this.deliveryDate,
+            status: '/api/statuses/17', //'en cours' par défaut
             user: userIRI,  
-            delivery_slot: this.deliverySlot || "",
-            drop_off_date: this.dropOffDate || "",
+            delivery_slot: this.deliverySlot,
+            drop_off_date: this.dropOffDate,
             order_date: new Date().toISOString(),
             items: itemIds
           };
@@ -139,9 +139,9 @@ export class CartComponent implements OnInit {
           console.log('Order à envoyer:', order);
   
           this.orderService.createOrder(order).subscribe(
-            (createdOrder: any) => {
+            (createdOrder: CreatedOrderResponse) => {
               const createdOrderId =`/api/orders/${createdOrder['id']}`; // je récupère l'ID de la commande créée
-              console.log('Order créée:', createdOrderId);
+              console.log('Order créé:', createdOrderId);
   
               // Maj des items avec l'orderId
               const updateItemsObservables = createdItems.map(item => {
